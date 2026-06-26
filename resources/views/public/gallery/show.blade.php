@@ -17,7 +17,7 @@
             @forelse ($album->items as $item)
                 <figure class="card-soft overflow-hidden">
                     @if ($item->type === 'image' && $item->file_path)
-                        <img src="{{ asset('storage/' . $item->file_path) }}" alt="{{ $item->alt_text ?? $item->caption }}" class="w-full h-72 object-cover">
+                        <img src="{{ asset('storage/' . $item->file_path) }}" alt="{{ $item->alt_text ?? $item->caption }}" class="w-full h-72 object-contain bg-saffron-50">
                     @elseif ($item->type === 'youtube' && $item->external_url)
                         <div class="aspect-video">
                             <iframe class="w-full h-full" src="{{ $item->external_url }}" frameborder="0" allowfullscreen></iframe>

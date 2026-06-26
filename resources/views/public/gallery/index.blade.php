@@ -22,7 +22,7 @@
             @forelse ($albums as $album)
                 <a href="{{ route('gallery.show', $album->slug) }}" class="card-soft overflow-hidden block group">
                     @if ($album->cover_image)
-                        <img src="{{ asset('storage/' . $album->cover_image) }}" alt="{{ $album->name }}" class="w-full h-56 object-cover group-hover:scale-105 transition">
+                        <img src="{{ asset('storage/' . $album->cover_image) }}" alt="{{ $album->name }}" class="w-full h-56 object-contain bg-saffron-50 group-hover:scale-105 transition">
                     @else
                         <div class="h-56 bg-gradient-to-br from-saffron-200 to-saffron-400 flex items-center justify-center text-5xl">🖼️</div>
                     @endif
