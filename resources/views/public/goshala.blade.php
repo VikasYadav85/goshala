@@ -107,10 +107,10 @@
             </ul>
         </div>
         <div class="grid grid-cols-2 gap-4">
-            <img src="{{ asset('img/home-hero.jpg') }}" alt="Gau Mata in golden light" class="rounded-2xl shadow-md aspect-square object-cover" style="object-position: 30% 50%">
-            <img src="{{ asset('img/home-hero.jpg') }}" alt="Sustainable goshala" class="rounded-2xl shadow-md aspect-square object-cover mt-8" style="object-position: 70% 30%">
-            <img src="{{ asset('img/home-hero.jpg') }}" alt="Cow herd at sunset" class="rounded-2xl shadow-md aspect-square object-cover" style="object-position: 50% 70%">
-            <img src="{{ asset('img/home-hero.jpg') }}" alt="Daily fodder seva" class="rounded-2xl shadow-md aspect-square object-cover mt-8" style="object-position: 80% 50%">
+            <img src="{{ asset('img/goshala/goshala-1.jpg') }}" alt="Rescued cow on the goshala's tree-lined path" class="rounded-2xl shadow-md aspect-square object-cover" loading="lazy">
+            <img src="{{ asset('img/goshala/goshala-2.jpg') }}" alt="Young rescued calf in the sanctuary" class="rounded-2xl shadow-md aspect-square object-cover mt-8" loading="lazy">
+            <img src="{{ asset('img/goshala/goshala-3.jpg') }}" alt="Healthy desi cow cared for at the goshala" class="rounded-2xl shadow-md aspect-square object-cover" loading="lazy">
+            <img src="{{ asset('img/goshala/goshala-4.jpg') }}" alt="Indigenous breed cow rescued and rehabilitated" class="rounded-2xl shadow-md aspect-square object-cover mt-8" loading="lazy">
         </div>
     </div>
 </section>
