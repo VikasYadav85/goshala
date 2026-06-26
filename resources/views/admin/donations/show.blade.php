@@ -20,8 +20,15 @@
             <dt class="text-gray-500 mt-3">Amount</dt><dd class="font-display text-2xl text-saffron-700 font-bold">₹{{ number_format($donation->amount) }}</dd>
             <dt class="text-gray-500">Frequency</dt><dd>{{ \Illuminate\Support\Str::title(str_replace('_', ' ', $donation->frequency)) }}</dd>
             <dt class="text-gray-500">Method</dt><dd>{{ \Illuminate\Support\Str::title($donation->payment_method) }}</dd>
-            <dt class="text-gray-500">Razorpay order</dt><dd class="font-mono text-xs">{{ $donation->razorpay_order_id ?: '—' }}</dd>
-            <dt class="text-gray-500">Razorpay payment</dt><dd class="font-mono text-xs">{{ $donation->razorpay_payment_id ?: '—' }}</dd>
+            @if (data_get($donation->payment_meta, 'upi_reference'))
+                <dt class="text-gray-500">UPI reference (UTR)</dt><dd class="font-mono text-xs font-semibold text-saffron-800">{{ data_get($donation->payment_meta, 'upi_reference') }}</dd>
+                <dt class="text-gray-500">UPI app</dt><dd>{{ data_get($donation->payment_meta, 'upi_app') ?: '—' }}</dd>
+                <dt class="text-gray-500">Paid to VPA</dt><dd class="font-mono text-xs">{{ data_get($donation->payment_meta, 'upi_vpa') ?: '—' }}</dd>
+                <dt class="text-gray-500">Reported at</dt><dd class="text-xs">{{ data_get($donation->payment_meta, 'reported_at') ?: '—' }}</dd>
+            @else
+                <dt class="text-gray-500">Razorpay order</dt><dd class="font-mono text-xs">{{ $donation->razorpay_order_id ?: '—' }}</dd>
+                <dt class="text-gray-500">Razorpay payment</dt><dd class="font-mono text-xs">{{ $donation->razorpay_payment_id ?: '—' }}</dd>
+            @endif
             <dt class="text-gray-500">Paid at</dt><dd>{{ optional($donation->paid_at)->format('d M Y, h:i A') ?: '—' }}</dd>
 
             @if ($donation->category)<dt class="text-gray-500 mt-3">Category</dt><dd>{{ $donation->category->name }}</dd>@endif

@@ -42,14 +42,23 @@ class DonationController extends Controller
             'payment_status' => ['required', 'in:pending,processing,success,failed,refunded'],
         ]);
 
+        $wasSuccess = $donation->payment_status === Donation::STATUS_SUCCESS;
+        $nowSuccess = $data['payment_status'] === Donation::STATUS_SUCCESS;
+
         $donation->payment_status = $data['payment_status'];
-        if ($data['payment_status'] === Donation::STATUS_SUCCESS && ! $donation->paid_at) {
+        if ($nowSuccess && ! $donation->paid_at) {
             $donation->paid_at = now();
         }
         $donation->save();
 
-        if ($donation->payment_status === Donation::STATUS_SUCCESS && $donation->campaign_id) {
-            $donation->campaign->increment('raised_amount', $donation->amount);
+        // Only adjust the campaign tally on an actual transition into/out of
+        // success, so re-saving a donation never double-counts the amount.
+        if ($donation->campaign_id) {
+            if ($nowSuccess && ! $wasSuccess) {
+                $donation->campaign->increment('raised_amount', $donation->amount);
+            } elseif ($wasSuccess && ! $nowSuccess) {
+                $donation->campaign->decrement('raised_amount', $donation->amount);
+            }
         }
 
         return back()->with('success', 'Donation status updated.');

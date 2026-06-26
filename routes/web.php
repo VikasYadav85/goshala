@@ -47,6 +47,7 @@ Route::prefix('donate')->name('donations.')->group(function () {
     Route::post('/checkout', [PublicDonationController::class, 'store'])->name('store');
     Route::get('/{donation}/pay', [PublicDonationController::class, 'pay'])->name('pay');
     Route::post('/{donation}/callback', [PublicDonationController::class, 'callback'])->name('callback');
+    Route::post('/{donation}/upi-confirm', [PublicDonationController::class, 'upiConfirm'])->name('upi.confirm');
     Route::post('/{donation}/simulate', [PublicDonationController::class, 'simulate'])->name('simulate');
     Route::get('/{donation}/thanks', [PublicDonationController::class, 'thanks'])->name('thanks');
 });

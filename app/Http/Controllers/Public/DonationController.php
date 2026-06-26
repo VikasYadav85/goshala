@@ -89,8 +89,49 @@ class DonationController extends Controller
     public function pay(Donation $donation): View
     {
         abort_if($donation->payment_status === Donation::STATUS_SUCCESS, 404);
+
         $rzpKey = config('services.razorpay.key');
-        return view('public.donation.pay', compact('donation', 'rzpKey'));
+
+        $upiVpa = config('services.upi.vpa');
+        $upiPayee = config('services.upi.payee');
+        $upiUri = $upiVpa
+            ? 'upi://pay?' . http_build_query([
+                'pa' => $upiVpa,
+                'pn' => $upiPayee,
+                'am' => $donation->amount,
+                'cu' => 'INR',
+                'tn' => 'Donation ' . $donation->reference_no,
+                'tr' => $donation->reference_no,
+            ])
+            : null;
+
+        return view('public.donation.pay', compact('donation', 'rzpKey', 'upiVpa', 'upiPayee', 'upiUri'));
+    }
+
+    public function upiConfirm(Donation $donation, Request $request): RedirectResponse
+    {
+        abort_if($donation->payment_status === Donation::STATUS_SUCCESS, 404);
+
+        $data = $request->validate([
+            'upi_reference' => ['required', 'string', 'min:6', 'max:60'],
+            'upi_app' => ['nullable', 'string', 'max:40'],
+        ]);
+
+        // Donor self-reports the UPI transaction/UTR. We do NOT mark this
+        // successful — it stays "processing" until an admin verifies the
+        // amount against the bank/UPI statement and marks it success.
+        $donation->fill([
+            'payment_method' => 'upi',
+            'payment_status' => Donation::STATUS_PROCESSING,
+            'payment_meta' => array_merge((array) $donation->payment_meta, [
+                'upi_reference' => $data['upi_reference'],
+                'upi_app' => $data['upi_app'] ?? null,
+                'upi_vpa' => config('services.upi.vpa'),
+                'reported_at' => now()->toDateTimeString(),
+            ]),
+        ])->save();
+
+        return redirect()->route('donations.thanks', $donation);
     }
 
     public function callback(Donation $donation, Request $request): RedirectResponse

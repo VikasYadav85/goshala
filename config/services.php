@@ -41,4 +41,9 @@ return [
         'currency' => env('RAZORPAY_CURRENCY', 'INR'),
     ],
 
+    'upi' => [
+        'vpa' => env('UPI_VPA', ''),
+        'payee' => env('UPI_PAYEE_NAME', env('APP_NAME', 'Donation')),
+    ],
+
 ];
