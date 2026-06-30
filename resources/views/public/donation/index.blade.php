@@ -75,7 +75,7 @@
             <form action="{{ route('donations.create') }}" method="GET" class="flex flex-wrap gap-3 items-end justify-center">
                 <div class="flex-1 min-w-[200px] text-left">
                     <label class="form-label">Amount (₹)</label>
-                    <input type="number" name="amount" min="100" value="1100" class="form-input">
+                    <input type="number" name="amount" min="10" value="1100" class="form-input">
                 </div>
                 <button class="btn btn-primary">Continue →</button>
             </form>

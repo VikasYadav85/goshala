@@ -7,6 +7,7 @@ use App\Models\Campaign;
 use App\Models\Cow;
 use App\Models\Donation;
 use App\Models\DonationCategory;
+use App\Actions\SendDonationReceipt;
 use App\Models\Faq;
 use App\Services\RazorpayService;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class DonationController extends Controller
             'donor_pincode' => ['nullable', 'string', 'max:12'],
             'donor_country' => ['nullable', 'string', 'max:100'],
 
-            'amount' => ['required', 'integer', 'min:100'],
+            'amount' => ['required', 'integer', 'min:10'],
             'frequency' => ['required', 'in:one_time,monthly,yearly'],
             'is_anonymous' => ['nullable', 'boolean'],
             'wants_80g_receipt' => ['nullable', 'boolean'],
@@ -159,6 +160,10 @@ class DonationController extends Controller
             $donation->campaign->increment('raised_amount', $donation->amount);
         }
 
+        if ($verified) {
+            app(SendDonationReceipt::class)($donation);
+        }
+
         return redirect()->route('donations.thanks', $donation);
     }
 
@@ -177,6 +182,8 @@ class DonationController extends Controller
         if ($donation->campaign_id) {
             $donation->campaign->increment('raised_amount', $donation->amount);
         }
+
+        app(SendDonationReceipt::class)($donation);
 
         return redirect()->route('donations.thanks', $donation);
     }

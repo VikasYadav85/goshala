@@ -1,6 +1,6 @@
 <?php
 /**
- * Standalone SQLite → MySQL dump generator for Gopal Seva Trust platform.
+ * Standalone SQLite → MySQL dump generator for Gopal Seva Samarpan Trust platform.
  * Reads platform/database/database.sqlite and writes a MySQL-compatible .sql file
  * with CREATE TABLE + INSERT statements ready to import via phpMyAdmin / mysql CLI.
  *

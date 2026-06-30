@@ -2,14 +2,14 @@
 @section('title', 'Team')
 
 @section('content')
-<x-admin.page-header title="Team &amp; Trustees" subtitle="Trustees, veterinarians, and core volunteers shown on the website.">
+<x-admin.page-header title="Team & Trustees" subtitle="Trustees, veterinarians, and core volunteers shown on the website.">
     <x-slot:cta><a href="{{ route('admin.team.create') }}" class="btn btn-primary text-sm">+ Add member</a></x-slot:cta>
 </x-admin.page-header>
 
 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
     @forelse ($members as $m)
         <div class="admin-card p-5 text-center">
-            @if ($m->photo)<img src="{{ asset('storage/' . $m->photo) }}" class="w-24 h-24 rounded-full mx-auto object-cover" alt="">@else<div class="w-24 h-24 rounded-full mx-auto bg-saffron-200 flex items-center justify-center text-saffron-800 font-bold text-2xl">{{ \Illuminate\Support\Str::of($m->name)->substr(0,1) }}</div>@endif
+            @if ($m->photo)<img src="{{ asset('storage/' . $m->photo) }}" class="w-24 h-24 rounded-full mx-auto object-cover object-top ring-2 ring-saffron-100" alt="">@else<div class="w-24 h-24 rounded-full mx-auto bg-saffron-200 flex items-center justify-center text-saffron-800 font-bold text-2xl">{{ \Illuminate\Support\Str::of($m->name)->substr(0,1) }}</div>@endif
             <div class="font-semibold mt-3">{{ $m->name }}</div>
             <div class="text-xs text-gray-500">{{ $m->role }}</div>
             <div class="text-xs text-gray-400">{{ \Illuminate\Support\Str::title($m->group) }}</div>

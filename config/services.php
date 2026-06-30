@@ -46,4 +46,15 @@ return [
         'payee' => env('UPI_PAYEE_NAME', env('APP_NAME', 'Donation')),
     ],
 
+    // Used on donation receipts / 80G tax invoices
+    'trust' => [
+        'name' => env('APP_NAME', 'Gopal Seva Samarpan Trust'),
+        'email' => env('TRUST_EMAIL'),
+        'phone' => env('TRUST_PHONE'),
+        'address' => env('TRUST_ADDRESS'),
+        'pan' => env('TRUST_PAN'),
+        '80g_number' => env('TRUST_80G_NUMBER'),
+        'reg_number' => env('TRUST_REG_NUMBER'),
+    ],
+
 ];

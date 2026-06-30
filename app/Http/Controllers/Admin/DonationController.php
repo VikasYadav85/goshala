@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\SendDonationReceipt;
 use App\Http\Controllers\Controller;
 use App\Models\Donation;
 use Illuminate\Http\RedirectResponse;
@@ -59,6 +60,13 @@ class DonationController extends Controller
             } elseif ($wasSuccess && ! $nowSuccess) {
                 $donation->campaign->decrement('raised_amount', $donation->amount);
             }
+        }
+
+        // Email the 80G receipt whenever the donation is successful and a
+        // receipt hasn't gone out yet (covers admin-verified UPI / bank / cash,
+        // and retries a previously failed send). The action itself is idempotent.
+        if ($nowSuccess) {
+            app(SendDonationReceipt::class)($donation);
         }
 
         return back()->with('success', 'Donation status updated.');

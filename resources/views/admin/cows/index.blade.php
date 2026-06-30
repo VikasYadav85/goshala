@@ -18,9 +18,9 @@
     @forelse ($cows as $cow)
         <div class="admin-card overflow-hidden">
             @if ($cow->image)
-                <img src="{{ asset('storage/' . $cow->image) }}" alt="" class="w-full h-40 object-cover">
+                <img src="{{ asset('storage/' . $cow->image) }}" alt="" class="w-full aspect-[4/3] object-contain object-center bg-saffron-50">
             @else
-                <div class="h-40 bg-gradient-to-br from-saffron-100 to-saffron-300 flex items-center justify-center text-4xl">🐄</div>
+                <div class="aspect-[4/3] bg-gradient-to-br from-saffron-100 to-saffron-300 flex items-center justify-center text-4xl">🐄</div>
             @endif
             <div class="p-4">
                 <div class="flex items-start justify-between">

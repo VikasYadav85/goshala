@@ -18,7 +18,9 @@
         <div class="sm:col-span-2"><label class="form-label">Description</label><textarea name="description" rows="3" class="form-textarea">{{ old('description', $album->description) }}</textarea></div>
         <div class="sm:col-span-2">
             <label class="form-label">Cover image</label>
-            <input type="file" name="cover_image" accept="image/*" class="form-input">
+            <input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" class="form-input">
+            <p class="text-xs text-gray-500 mt-1">Recommended: 16:9 landscape (e.g. 1280×720). It is auto-cropped to fit the card. Min 640×360, max 4&nbsp;MB.</p>
+            @error('cover_image')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             @if ($album->cover_image)<img src="{{ asset('storage/' . $album->cover_image) }}" class="mt-2 h-32 rounded-lg" alt="">@endif
         </div>
         <div><label class="form-label">Sort order</label><input type="number" name="sort_order" value="{{ old('sort_order', $album->sort_order) }}" class="form-input"></div>

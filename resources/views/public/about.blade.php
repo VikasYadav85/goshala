@@ -100,9 +100,9 @@
                 @foreach ($trustees as $member)
                     <div class="card-soft overflow-hidden text-center">
                         @if ($member->photo)
-                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" class="w-full h-56 object-cover">
+                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" class="w-full aspect-[3/4] object-cover object-center bg-saffron-100">
                         @else
-                            <div class="h-56 bg-gradient-to-br from-saffron-200 to-saffron-400 flex items-center justify-center text-saffron-900 font-display text-3xl">{{ \Illuminate\Support\Str::of($member->name)->substr(0, 1) }}</div>
+                            <div class="aspect-[3/4] bg-gradient-to-br from-saffron-200 to-saffron-400 flex items-center justify-center text-saffron-900 font-display text-3xl">{{ \Illuminate\Support\Str::of($member->name)->substr(0, 1) }}</div>
                         @endif
                         <div class="p-4">
                             <div class="font-display font-semibold text-saffron-900">{{ $member->name }}</div>
@@ -119,9 +119,9 @@
                 @foreach ($team as $member)
                     <div class="card-soft overflow-hidden text-center">
                         @if ($member->photo)
-                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" class="w-full h-48 object-cover">
+                            <img src="{{ asset('storage/' . $member->photo) }}" alt="{{ $member->name }}" class="w-full aspect-[3/4] object-cover object-center bg-saffron-100">
                         @else
-                            <div class="h-48 bg-gradient-to-br from-saffron-100 to-saffron-300 flex items-center justify-center text-saffron-900 font-display text-2xl">{{ \Illuminate\Support\Str::of($member->name)->substr(0, 1) }}</div>
+                            <div class="aspect-[3/4] bg-gradient-to-br from-saffron-100 to-saffron-300 flex items-center justify-center text-saffron-900 font-display text-2xl">{{ \Illuminate\Support\Str::of($member->name)->substr(0, 1) }}</div>
                         @endif
                         <div class="p-4">
                             <div class="font-semibold text-saffron-900">{{ $member->name }}</div>

@@ -9,7 +9,7 @@
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
     @forelse ($albums as $album)
         <div class="admin-card overflow-hidden">
-            @if ($album->cover_image)<img src="{{ asset('storage/' . $album->cover_image) }}" class="w-full h-40 object-cover" alt="">@else<div class="h-40 bg-gradient-to-br from-saffron-100 to-saffron-300 flex items-center justify-center text-3xl">🖼️</div>@endif
+            @if ($album->cover_image)<img src="{{ asset('storage/' . $album->cover_image) }}" class="w-full aspect-video object-cover" alt="">@else<div class="aspect-video bg-gradient-to-br from-saffron-100 to-saffron-300 flex items-center justify-center text-3xl">🖼️</div>@endif
             <div class="p-4">
                 <div class="flex items-start justify-between">
                     <div>

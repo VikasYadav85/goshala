@@ -54,7 +54,7 @@
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="form-label">Amount (₹) *</label>
-                    <input type="number" name="amount" required min="100" value="{{ old('amount', $amount) }}" class="form-input">
+                    <input type="number" name="amount" required min="10" value="{{ old('amount', $amount) }}" class="form-input">
                     @error('amount')<div class="form-error">{{ $message }}</div>@enderror
                 </div>
                 <div>

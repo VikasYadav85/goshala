@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Admin') · Gopal Seva Trust</title>
+    <title>@yield('title', 'Admin') · Gopal Seva Samarpan Trust</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -21,7 +21,7 @@
                     <img src="{{ asset('img/logo-mark.png') }}" alt="" class="w-9 h-9 object-contain">
                 </div>
                 <div>
-                    <div class="font-display font-semibold leading-tight">Gopal Seva</div>
+                    <div class="font-display font-semibold leading-tight">Gopal Seva Samarpan Trust</div>
                     <div class="text-xs text-saffron-300">Admin Panel</div>
                 </div>
             </a>

@@ -20,7 +20,7 @@
                 </select>
             </div>
             <div><label class="form-label">Description</label><textarea name="description" rows="3" class="form-textarea">{{ $album->description }}</textarea></div>
-            <div><label class="form-label">Cover image</label><input type="file" name="cover_image" accept="image/*" class="form-input"></div>
+            <div><label class="form-label">Cover image</label><input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" class="form-input"><p class="text-xs text-gray-500 mt-1">Recommended: 16:9 landscape (e.g. 1280×720). Auto-cropped to fit the card. Min 640×360, max 4&nbsp;MB.</p>@error('cover_image')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror</div>
             <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="is_published" value="1" @checked($album->is_published) class="rounded"> Published</label>
             <button class="btn btn-primary w-full text-sm">Save details</button>
         </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div><label class="form-label">Caption</label><input name="caption" class="form-input"></div>
                 <div><label class="form-label">Image (if type = image)</label><input type="file" name="file" accept="image/*" class="form-input"></div>
-                <div><label class="form-label">URL (if type = youtube)</label><input name="external_url" class="form-input" placeholder="https://www.youtube.com/embed/..."></div>
+                <div><label class="form-label">URL (if type = youtube)</label><input name="external_url" class="form-input" placeholder="Paste any YouTube link (watch, youtu.be or embed)"></div>
             </div>
             <button class="btn btn-primary text-sm mt-4">Add to album</button>
         </form>
