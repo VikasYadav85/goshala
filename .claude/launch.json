@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "goshala",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["artisan", "serve", "--host=127.0.0.1", "--port=8768"],
+      "port": 8768
+    }
+  ]
+}
