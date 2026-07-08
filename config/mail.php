@@ -65,6 +65,12 @@ return [
             'transport' => 'resend',
         ],
 
+        // Brevo (Sendinblue) HTTP API — sends over 443, needed because this
+        // host blocks outbound SMTP. Transport registered in AppServiceProvider.
+        'brevo' => [
+            'transport' => 'brevo',
+        ],
+
         'sendmail' => [
             'transport' => 'sendmail',
             'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),

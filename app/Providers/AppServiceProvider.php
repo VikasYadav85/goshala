@@ -4,8 +4,11 @@ namespace App\Providers;
 
 use App\Models\SiteSetting;
 use App\Services\RazorpayService;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoTransportFactory;
+use Symfony\Component\Mailer\Transport\Dsn;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +27,13 @@ class AppServiceProvider extends ServiceProvider
     {
         // Make site-wide values available to every view
         View::share('publicSettings', $this->safeSettings());
+
+        // Brevo HTTP-API mail transport (this host blocks outbound SMTP).
+        Mail::extend('brevo', function () {
+            return (new BrevoTransportFactory)->create(
+                new Dsn('brevo+api', 'default', (string) config('services.brevo.key')),
+            );
+        });
     }
 
     private function safeSettings(): array

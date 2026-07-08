@@ -5,6 +5,9 @@ Format: [DATE] [AUTHOR] Description
 ## [Unreleased]
 
 ### Added
+- Mail: Brevo HTTP-API transport (`brevo` mailer) so email works on hosts that block outbound SMTP
+  (DigitalOcean blocks 25/465/587 → Gmail SMTP timed out, donation receipts silently failed).
+  Set `MAIL_MAILER=brevo` + `BREVO_API_KEY` + a Brevo-verified `MAIL_FROM_ADDRESS`.
 - SEO: dynamic `/sitemap.xml` (static pages + published blog posts, campaigns, events, gallery albums).
 - SEO: dynamic `/robots.txt` route (domain-agnostic, exposes sitemap, disallows /admin) replacing the static file.
 - SEO: canonical link, og:url/og:site_name/twitter:card meta, and JSON-LD `NGO` structured data in the public layout.
