@@ -8,10 +8,38 @@
     <title>@yield('title', config('app.name')) — {{ config('app.name') }}</title>
     <meta name="description" content="@yield('meta_description', 'Gopal Seva Samarpan Trust — a sanctuary for rescued cows in Bharat. Donate, sponsor a cow, volunteer, and join our spiritual seva.')">
 
+    <link rel="canonical" href="{{ url()->current() }}">
+
     <meta property="og:title" content="@yield('title', config('app.name'))">
     <meta property="og:description" content="@yield('meta_description', 'Gopal Seva Samarpan Trust — Goshala for rescued cows.')">
     <meta property="og:image" content="@yield('og_image', asset('img/og-default.jpg'))">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
     <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    @php
+        $seoSocial = collect($publicSettings['social'] ?? [])
+            ->filter(fn ($u) => $u && $u !== '#')
+            ->values()->all();
+        $seoOrg = array_filter([
+            '@context' => 'https://schema.org',
+            '@type' => 'NGO',
+            'name' => config('app.name'),
+            'url' => url('/'),
+            'logo' => asset('favicon.ico'),
+            'description' => $publicSettings['footer_about'] ?? null,
+            'telephone' => $publicSettings['phone'] ?? null,
+            'email' => $publicSettings['email'] ?? null,
+            'address' => ($publicSettings['address'] ?? null) ? [
+                '@type' => 'PostalAddress',
+                'streetAddress' => $publicSettings['address'],
+                'addressCountry' => 'IN',
+            ] : null,
+            'sameAs' => $seoSocial ?: null,
+        ]);
+    @endphp
+    <script type="application/ld+json">{!! json_encode($seoOrg, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -23,6 +23,7 @@ use App\Http\Controllers\Public\EventController as PublicEventController;
 use App\Http\Controllers\Public\GalleryController as PublicGalleryController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\PageController;
+use App\Http\Controllers\Public\SitemapController;
 use App\Http\Controllers\Public\SubscriberController;
 use App\Http\Controllers\Public\VolunteerController as PublicVolunteerController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+// robots.txt is served dynamically so the Sitemap URL always follows APP_URL (domain-agnostic).
+Route::get('/robots.txt', function () {
+    $body = implode("\n", [
+        'User-agent: *',
+        'Disallow: /admin',
+        'Disallow: /donate/*/pay',
+        '',
+        'Sitemap: '.route('sitemap'),
+        '',
+    ]);
+
+    return response($body, 200, ['Content-Type' => 'text/plain']);
+})->name('robots');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/our-goshala', [PageController::class, 'goshala'])->name('goshala');
 Route::get('/transparency', [PageController::class, 'transparency'])->name('transparency');
