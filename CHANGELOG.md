@@ -19,7 +19,8 @@ Format: [DATE] [AUTHOR] Description
 - Initial Claude Code documentation layer (CLAUDE.md, docs/, tasks/, .claude/)
 
 ### Changed
-(none)
+- Donation receipt email now uses the shared branded layout (logo header, "Dear {name}",
+  receipt content, date + trust sign-off, footer) for a consistent look with the other emails.
 
 ### Fixed
 (none)
