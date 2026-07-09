@@ -7,8 +7,10 @@ Format: [DATE] [AUTHOR] Description
 ### Added
 - Mail: notification emails on public form submissions, all using a shared branded email layout
   (logo header + footer): contact → admin notification + sender acknowledgement, new newsletter
-  subscriber → welcome, volunteer → admin notification. Admin recipient via `ADMIN_NOTIFY_EMAIL`
-  (defaults to the From address). Failures are logged, never break the form. Covered by tests.
+  subscriber → welcome, volunteer → admin notification, and donation → admin notification (alongside
+  the donor's 80G receipt, fired once from SendDonationReceipt). Admin recipient via
+  `ADMIN_NOTIFY_EMAIL` (defaults to the From address). Failures are logged, never break the
+  flow. Covered by tests.
 - Mail: Brevo HTTP-API transport (`brevo` mailer) so email works on hosts that block outbound SMTP
   (DigitalOcean blocks 25/465/587 → Gmail SMTP timed out, donation receipts silently failed).
   Set `MAIL_MAILER=brevo` + `BREVO_API_KEY` + a Brevo-verified `MAIL_FROM_ADDRESS`.

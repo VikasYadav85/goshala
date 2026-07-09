@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Mail\DonationAdminNotification;
 use App\Mail\DonationReceiptMail;
 use App\Models\Donation;
 use Illuminate\Support\Facades\Log;
@@ -37,6 +38,19 @@ class SendDonationReceipt
             Mail::to($donation->donor_email)->send(new DonationReceiptMail($donation));
 
             $donation->forceFill(['receipt_issued_at' => now()])->save();
+
+            // Notify the trust of the new donation. Best-effort: a failure here
+            // must not undo the issued receipt, so it is logged separately.
+            // Fires exactly once — later invocations return early above.
+            try {
+                Mail::to(config('services.admin.email'))->send(new DonationAdminNotification($donation));
+            } catch (\Throwable $e) {
+                Log::error('Donation admin notification failed', [
+                    'donation_id' => $donation->id,
+                    'reference_no' => $donation->reference_no,
+                    'error' => $e->getMessage(),
+                ]);
+            }
         } catch (\Throwable $e) {
             Log::error('Donation receipt email failed', [
                 'donation_id' => $donation->id,
