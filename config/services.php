@@ -22,6 +22,12 @@ return [
         'key' => env('BREVO_API_KEY'),
     ],
 
+    // Where admin/trust notification emails (contact, volunteer) are delivered.
+    // Falls back to the From address if unset.
+    'admin' => [
+        'email' => env('ADMIN_NOTIFY_EMAIL', env('MAIL_FROM_ADDRESS')),
+    ],
+
     'resend' => [
         'key' => env('RESEND_API_KEY'),
     ],

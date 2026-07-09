@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VolunteerAdminNotification;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class VolunteerController extends Controller
@@ -35,7 +38,14 @@ class VolunteerController extends Controller
             'referral_source' => ['nullable', 'string', 'max:120'],
         ]);
 
-        Volunteer::create($data + ['status' => Volunteer::STATUS_PENDING, 'country' => 'India']);
+        $volunteer = Volunteer::create($data + ['status' => Volunteer::STATUS_PENDING, 'country' => 'India']);
+
+        // Notify the trust. A mail failure must never break the submission.
+        try {
+            Mail::to(config('services.admin.email'))->send(new VolunteerAdminNotification($volunteer));
+        } catch (\Throwable $e) {
+            Log::error('Volunteer email failed', ['volunteer_id' => $volunteer->id, 'error' => $e->getMessage()]);
+        }
 
         return redirect()->route('volunteer.thanks');
     }
