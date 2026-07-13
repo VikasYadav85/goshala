@@ -11,9 +11,12 @@ use App\Http\Controllers\Admin\DonationController as AdminDonationController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
+use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\SettingsController as AdminSettingsController;
 use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\VolunteerController as AdminVolunteerController;
 use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\CampaignController as PublicCampaignController;
@@ -112,46 +115,64 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/', AdminDashboardController::class)->name('dashboard');
 
-        Route::get('donations', [AdminDonationController::class, 'index'])->name('donations.index');
-        Route::get('donations/{donation}', [AdminDonationController::class, 'show'])->name('donations.show');
-        Route::patch('donations/{donation}', [AdminDonationController::class, 'updateStatus'])->name('donations.update');
+        Route::middleware('permission:manage-donations')->group(function () {
+            Route::get('donations', [AdminDonationController::class, 'index'])->name('donations.index');
+            Route::get('donations/{donation}', [AdminDonationController::class, 'show'])->name('donations.show');
+            Route::patch('donations/{donation}', [AdminDonationController::class, 'updateStatus'])->name('donations.update');
+        });
 
-        Route::resource('cows', AdminCowController::class)->except(['show']);
-        Route::resource('campaigns', AdminCampaignController::class)->except(['show']);
-        Route::resource('events', AdminEventController::class)->except(['show']);
+        Route::resource('cows', AdminCowController::class)->except(['show'])->middleware('permission:manage-cows');
+        Route::resource('campaigns', AdminCampaignController::class)->except(['show'])->middleware('permission:manage-campaigns');
+        Route::resource('events', AdminEventController::class)->except(['show'])->middleware('permission:manage-events');
 
         Route::resource('blog', AdminBlogPostController::class)
             ->parameters(['blog' => 'post'])
-            ->except(['show']);
+            ->except(['show'])
+            ->middleware('permission:manage-blog');
 
-        Route::get('volunteers', [AdminVolunteerController::class, 'index'])->name('volunteers.index');
-        Route::get('volunteers/{volunteer}', [AdminVolunteerController::class, 'show'])->name('volunteers.show');
-        Route::patch('volunteers/{volunteer}', [AdminVolunteerController::class, 'update'])->name('volunteers.update');
+        Route::middleware('permission:manage-volunteers')->group(function () {
+            Route::get('volunteers', [AdminVolunteerController::class, 'index'])->name('volunteers.index');
+            Route::get('volunteers/{volunteer}', [AdminVolunteerController::class, 'show'])->name('volunteers.show');
+            Route::patch('volunteers/{volunteer}', [AdminVolunteerController::class, 'update'])->name('volunteers.update');
+        });
 
-        Route::get('messages', [AdminContactMessageController::class, 'index'])->name('messages.index');
-        Route::get('messages/{message}', [AdminContactMessageController::class, 'show'])->name('messages.show');
-        Route::patch('messages/{message}', [AdminContactMessageController::class, 'update'])->name('messages.update');
-        Route::delete('messages/{message}', [AdminContactMessageController::class, 'destroy'])->name('messages.destroy');
+        Route::middleware('permission:manage-messages')->group(function () {
+            Route::get('messages', [AdminContactMessageController::class, 'index'])->name('messages.index');
+            Route::get('messages/{message}', [AdminContactMessageController::class, 'show'])->name('messages.show');
+            Route::patch('messages/{message}', [AdminContactMessageController::class, 'update'])->name('messages.update');
+            Route::delete('messages/{message}', [AdminContactMessageController::class, 'destroy'])->name('messages.destroy');
+        });
 
-        Route::resource('testimonials', AdminTestimonialController::class)->except(['show']);
+        Route::resource('testimonials', AdminTestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');
 
         Route::resource('team', AdminTeamMemberController::class)
             ->parameters(['team' => 'member'])
-            ->except(['show']);
+            ->except(['show'])
+            ->middleware('permission:manage-team');
 
         Route::resource('donation-categories', AdminDonationCategoryController::class)
             ->parameters(['donation-categories' => 'category'])
-            ->except(['show']);
+            ->except(['show'])
+            ->middleware('permission:manage-donation-categories');
 
-        Route::resource('gallery', AdminGalleryController::class)
-            ->parameters(['gallery' => 'album'])
-            ->except(['show']);
-        Route::post('gallery/{album}/items', [AdminGalleryController::class, 'addItem'])->name('gallery.items.store');
-        Route::delete('gallery/items/{item}', [AdminGalleryController::class, 'destroyItem'])->name('gallery.items.destroy');
+        Route::middleware('permission:manage-gallery')->group(function () {
+            Route::resource('gallery', AdminGalleryController::class)
+                ->parameters(['gallery' => 'album'])
+                ->except(['show']);
+            Route::post('gallery/{album}/items', [AdminGalleryController::class, 'addItem'])->name('gallery.items.store');
+            Route::delete('gallery/items/{item}', [AdminGalleryController::class, 'destroyItem'])->name('gallery.items.destroy');
+        });
 
-        Route::resource('faqs', AdminFaqController::class)->except(['show']);
+        Route::resource('faqs', AdminFaqController::class)->except(['show'])->middleware('permission:manage-faqs');
 
-        Route::get('settings', [AdminSettingsController::class, 'edit'])->name('settings.edit');
-        Route::put('settings', [AdminSettingsController::class, 'update'])->name('settings.update');
+        Route::middleware('permission:manage-settings')->group(function () {
+            Route::get('settings', [AdminSettingsController::class, 'edit'])->name('settings.edit');
+            Route::put('settings', [AdminSettingsController::class, 'update'])->name('settings.update');
+        });
+
+        // Access control (super_admin only — only super_admin holds these permissions).
+        Route::resource('users', AdminUserController::class)->except(['show'])->middleware('permission:manage-users');
+        Route::resource('roles', AdminRoleController::class)->except(['show'])->middleware('permission:manage-roles');
+        Route::resource('permissions', AdminPermissionController::class)->except(['show'])->middleware('permission:manage-permissions');
     });
 });

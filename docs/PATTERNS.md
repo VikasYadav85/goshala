@@ -86,19 +86,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', AdminDashboardController::class)->name('dashboard');
-        // ...all admin CRUD...
+        // Each section additionally gated by its permission:
+        Route::resource('faqs', AdminFaqController::class)->except(['show'])
+            ->middleware('permission:manage-faqs');
     });
 });
 ```
 
-The `admin` alias is registered in `bootstrap/app.php` (Laravel 12 — no `Kernel.php`):
+The middleware aliases are registered in `bootstrap/app.php` (Laravel 12 — no `Kernel.php`); the `permission`/`role` aliases come from Spatie:
 
 ```php
-$middleware->alias(['admin' => EnsureUserIsAdmin::class]);
+$middleware->alias([
+    'admin' => EnsureUserIsAdmin::class,
+    'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+    'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+]);
 $middleware->redirectGuestsTo(fn () => route('admin.login'));
 ```
 
-`app/Http/Middleware/EnsureUserIsAdmin.php` checks `is_active` + `canManageContent()` and `abort(403)` on failure. Login uses `Auth::attempt(...)` + `session()->regenerate()` in `Admin\AuthController`.
+`EnsureUserIsAdmin` is the **panel-entry** gate: `is_active` + `canManageContent()` (= the `access-admin` permission) → `abort(403)`. **Per-section** authorization is the `permission:manage-<section>` middleware on each route group. In code/Blade, check with `$user->can('manage-faqs')` / `@can('manage-faqs')` — never re-read the legacy `User.role` string. New sections: add a permission to `config/rbac.php`, gate the route with `permission:<key>`, and add an `@can`-filtered nav link. super_admin bypasses everything via `Gate::before` (`AppServiceProvider`).
 
 ## 5. Config / env access
 

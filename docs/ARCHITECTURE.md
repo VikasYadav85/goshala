@@ -106,9 +106,11 @@ Server-rendered web routes only (no `api.php`, no JSON API). Grouped:
 
 - **Admin login** is a custom session flow in `Admin\AuthController`: `Auth::attempt($credentials, remember)`, then re-checks `is_active` + `canManageContent()`, `session()->regenerate()`, `redirect()->intended(admin.dashboard)`.
 - **Guards:** Laravel default `web` guard (session). `guest` middleware on login routes; `auth` + `admin` on all admin management routes.
-- **`admin` middleware** (`EnsureUserIsAdmin`): rejects unauthenticated (redirect to `admin.login`), inactive users, or roles without `canManageContent()` (= super_admin/admin/editor; `staff` excluded) → `abort(403)`.
-- **Roles** live on `User.role`; helpers `isAdmin()`, `canManageContent()`. Passwords hashed (BCrypt rounds 12).
-- **Sessions** stored in the `sessions` DB table (`SESSION_DRIVER=database`).
+- **`admin` middleware** (`EnsureUserIsAdmin`): rejects unauthenticated (redirect to `admin.login`), inactive users, or users lacking `canManageContent()` (= the `access-admin` permission) → `abort(403)`.
+- **RBAC (Spatie laravel-permission):** roles & permissions are data, not a hardcoded enum. The catalog and role→permission presets live in `config/rbac.php`, seeded by `RolePermissionSeeder`. `User` uses the `HasRoles` trait; `isAdmin()`/`canManageContent()` delegate to Spatie (method names unchanged). The legacy `User.role` string is kept for display and synced on save. **super_admin** bypasses all gates via `Gate::before` (`AppServiceProvider`) and is seeded with every permission.
+- **Per-section enforcement:** each admin section route group is gated by `permission:manage-<section>` middleware (aliases registered in `bootstrap/app.php`); the sidebar filters links with `@can(...)`. Access-control screens (`admin.users.*`, `admin.roles.*`, `admin.permissions.*`) require `manage-users`/`manage-roles`/`manage-permissions` — held only by super_admin.
+- **Managing access:** the `/admin` "Access control" menu (`Admin\{User,Role,Permission}Controller`) creates users, defines roles with a permission matrix, and edits the permission catalog. Guards: can't delete self or the last super_admin; built-in roles/permission keys are locked.
+- **Sessions** stored in the `sessions` DB table (`SESSION_DRIVER=database`). Passwords hashed (BCrypt rounds 12).
 - There is **no token/API auth** — no `api.php`, no Sanctum/Passport.
 
 ## 7. Background Jobs / Queues

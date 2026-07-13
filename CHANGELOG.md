@@ -5,6 +5,23 @@ Format: [DATE] [AUTHOR] Description
 ## [Unreleased]
 
 ### Added
+- RBAC: role-based access control via `spatie/laravel-permission`. New "Access control" admin menu
+  (super_admin only) — Users, Roles, and Permissions management:
+  - `Admin\{User,Role,Permission}Controller` (resource CRUD) + Blade views under
+    `resources/views/admin/{users,roles,permissions}/`.
+  - Users: create/edit accounts, assign a role, active toggle. Guards: can't delete self or the last
+    super_admin; last super_admin can't be demoted.
+  - Roles: create/edit with a grouped permission checkbox matrix. Built-in roles
+    (super_admin/admin/editor/staff) can't be deleted; super_admin keeps every permission.
+  - Permissions: fully editable catalog (key + display group); built-in permission keys locked;
+    new permissions auto-granted to super_admin.
+  - Enforcement: every admin section is gated by `permission:manage-<section>` middleware and the
+    sidebar filters links via `@can(...)`. super_admin bypasses all gates (`Gate::before`).
+  - Catalog + role presets live in `config/rbac.php`, seeded by `RolePermissionSeeder`.
+  - `User::isAdmin()`/`canManageContent()` now delegate to Spatie (method names unchanged).
+    `UserSeeder` backfills existing users' roles so no current login breaks.
+- Tests: `SecretaryPermissionTest` (role-gated add/edit) + `AccessControlTest` (menu gating, user
+  creation, permission→section access flip, guard rails, super_admin bypass). 11 tests, 27 assertions.
 - Mail: notification emails on public form submissions, all using a shared branded email layout
   (logo header + footer): contact → admin notification + sender acknowledgement, new newsletter
   subscriber → welcome, volunteer → admin notification, and donation → admin notification (alongside

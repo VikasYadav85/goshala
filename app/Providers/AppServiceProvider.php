@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\SiteSetting;
+use App\Models\User;
 use App\Services\RazorpayService;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // super_admin bypasses every gate/permission check (present and future).
+        Gate::before(fn (User $user, string $ability) => $user->hasRole(User::ROLE_SUPER_ADMIN) ? true : null);
+
         // Make site-wide values available to every view
         View::share('publicSettings', $this->safeSettings());
 

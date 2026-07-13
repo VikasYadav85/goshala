@@ -29,65 +29,77 @@
 
         <nav class="p-4 space-y-1 text-sm">
             @php
+                // Each link: [route, label, permission|null]. Null = always visible in-panel.
                 $navGroups = [
                     [
                         'label' => 'Overview',
                         'links' => [
-                            ['admin.dashboard', '🏠 Dashboard'],
+                            ['admin.dashboard', '🏠 Dashboard', null],
                         ],
                     ],
                     [
                         'label' => 'Donations',
                         'links' => [
-                            ['admin.donations.index', '💰 Donations'],
-                            ['admin.donation-categories.index', '🪔 Donation categories'],
-                            ['admin.campaigns.index', '🎯 Campaigns'],
+                            ['admin.donations.index', '💰 Donations', 'manage-donations'],
+                            ['admin.donation-categories.index', '🪔 Donation categories', 'manage-donation-categories'],
+                            ['admin.campaigns.index', '🎯 Campaigns', 'manage-campaigns'],
                         ],
                     ],
                     [
                         'label' => 'Goshala',
                         'links' => [
-                            ['admin.cows.index', '🐄 Cows'],
-                            ['admin.events.index', '🎉 Events'],
-                            ['admin.gallery.index', '🖼️ Gallery'],
+                            ['admin.cows.index', '🐄 Cows', 'manage-cows'],
+                            ['admin.events.index', '🎉 Events', 'manage-events'],
+                            ['admin.gallery.index', '🖼️ Gallery', 'manage-gallery'],
                         ],
                     ],
                     [
                         'label' => 'Content',
                         'links' => [
-                            ['admin.blog.index', '📝 Blog'],
-                            ['admin.testimonials.index', '⭐ Testimonials'],
-                            ['admin.team.index', '👥 Team'],
-                            ['admin.faqs.index', '❓ FAQs'],
+                            ['admin.blog.index', '📝 Blog', 'manage-blog'],
+                            ['admin.testimonials.index', '⭐ Testimonials', 'manage-testimonials'],
+                            ['admin.team.index', '👥 Team', 'manage-team'],
+                            ['admin.faqs.index', '❓ FAQs', 'manage-faqs'],
                         ],
                     ],
                     [
                         'label' => 'Engagement',
                         'links' => [
-                            ['admin.volunteers.index', '🌱 Volunteers'],
-                            ['admin.messages.index', '✉️ Messages'],
+                            ['admin.volunteers.index', '🌱 Volunteers', 'manage-volunteers'],
+                            ['admin.messages.index', '✉️ Messages', 'manage-messages'],
                         ],
                     ],
                     [
                         'label' => 'Settings',
                         'links' => [
-                            ['admin.settings.edit', '⚙️ Site settings'],
+                            ['admin.settings.edit', '⚙️ Site settings', 'manage-settings'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Access control',
+                        'links' => [
+                            ['admin.users.index', '🧑‍💼 Users', 'manage-users'],
+                            ['admin.roles.index', '🛡️ Roles', 'manage-roles'],
+                            ['admin.permissions.index', '🔑 Permissions', 'manage-permissions'],
                         ],
                     ],
                 ];
             @endphp
 
             @foreach ($navGroups as $group)
-                <div class="pt-3 first:pt-0">
-                    <div class="text-xs uppercase tracking-widest text-saffron-400 px-2 mb-1">{{ $group['label'] }}</div>
-                    @foreach ($group['links'] as $link)
-                        @php $isActive = request()->routeIs($link[0]) || request()->routeIs(str_replace('.index', '.*', $link[0])); @endphp
-                        <a href="{{ route($link[0]) }}"
-                           class="flex items-center gap-2 px-3 py-2 rounded-lg {{ $isActive ? 'bg-saffron-700 text-white' : 'text-saffron-100 hover:bg-saffron-800' }}">
-                            {{ $link[1] }}
-                        </a>
-                    @endforeach
-                </div>
+                @php $visible = collect($group['links'])->filter(fn ($l) => $l[2] === null || auth()->user()?->can($l[2])); @endphp
+                @if ($visible->isNotEmpty())
+                    <div class="pt-3 first:pt-0">
+                        <div class="text-xs uppercase tracking-widest text-saffron-400 px-2 mb-1">{{ $group['label'] }}</div>
+                        @foreach ($visible as $link)
+                            @php $isActive = request()->routeIs($link[0]) || request()->routeIs(str_replace('.index', '.*', $link[0])); @endphp
+                            <a href="{{ route($link[0]) }}"
+                               class="flex items-center gap-2 px-3 py-2 rounded-lg {{ $isActive ? 'bg-saffron-700 text-white' : 'text-saffron-100 hover:bg-saffron-800' }}">
+                                {{ $link[1] }}
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
             @endforeach
         </nav>
     </aside>

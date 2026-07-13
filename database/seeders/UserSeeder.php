@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate(
+        $admin = User::updateOrCreate(
             ['email' => 'admin@gopalsevatrust.org'],
             [
                 'name' => 'Trust Administrator',
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             ],
         );
 
-        User::updateOrCreate(
+        $editor = User::updateOrCreate(
             ['email' => 'editor@gopalsevatrust.org'],
             [
                 'name' => 'Content Editor',
@@ -32,5 +32,17 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
             ],
         );
+
+        $admin->syncRoles([User::ROLE_SUPER_ADMIN]);
+        $editor->syncRoles([User::ROLE_EDITOR]);
+
+        // Backfill: any user created before RBAC keeps access by mapping their
+        // legacy `role` string to the matching Spatie role.
+        User::query()->whereNotNull('role')->each(function (User $user) {
+            if ($user->roles()->exists()) {
+                return;
+            }
+            $user->syncRoles([$user->role]);
+        });
     }
 }
