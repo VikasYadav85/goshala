@@ -8,7 +8,7 @@ Rules added here prevent repeated mistakes. Each rule was born from an actual er
 - With `gh pr merge --repo`, always pass the PR number, URL, or branch explicitly; repository selection alone does not identify which PR to merge.
 
 ## Testing
-(none yet)
+- Production uses `composer install --no-dev`, so `php artisan test` is unavailable there. Run PHPUnit locally; on production use a direct framework-booted smoke test and HTTP health checks.
 
 ## Dependencies / Deploy
 - Prod runs PHP 8.2.31; local is PHP 8.3+. `composer require` on local can lock a package
@@ -18,6 +18,7 @@ Rules added here prevent repeated mistakes. Each rule was born from an actual er
   package's PHP requirement before adding.
 - When a deploy leaves the site broken, roll the SERVER CODE back first (`git reset --hard <last-good>`)
   to restore service, then fix forward locally — don't debug on a live-down site.
+- Standalone Laravel smoke scripts must require `vendor/autoload.php` before `bootstrap/app.php`.
 
 ## Bulk Operations
 - NEVER run sed -i on files without checking the file list first
