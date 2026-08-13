@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Services\OptimizedImageStorage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,16 +13,19 @@ use Illuminate\View\View;
 
 class BlogPostController extends Controller
 {
+    public function __construct(private readonly OptimizedImageStorage $images) {}
+
     public function index(): View
     {
         $posts = BlogPost::with(['category', 'author'])->latest()->paginate(20);
+
         return view('admin.blog.index', compact('posts'));
     }
 
     public function create(): View
     {
         return view('admin.blog.form', [
-            'post' => new BlogPost(),
+            'post' => new BlogPost,
             'categories' => BlogCategory::orderBy('name')->get(),
         ]);
     }
@@ -29,10 +33,10 @@ class BlogPostController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validated($request);
-        $data['slug'] = Str::slug($data['title']) . '-' . Str::lower(Str::random(5));
+        $data['slug'] = Str::slug($data['title']).'-'.Str::lower(Str::random(5));
         $data['author_id'] = $request->user()->id;
         if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $request->file('cover_image')->store('blog', 'public');
+            $data['cover_image'] = $this->images->store($request->file('cover_image'), 'blog');
         }
         $data['tags'] = collect(explode(',', $request->input('tags', '')))
             ->map(fn ($t) => trim($t))
@@ -43,6 +47,7 @@ class BlogPostController extends Controller
             $data['published_at'] = now();
         }
         BlogPost::create($data);
+
         return redirect()->route('admin.blog.index')->with('success', 'Post created.');
     }
 
@@ -58,7 +63,7 @@ class BlogPostController extends Controller
     {
         $data = $this->validated($request);
         if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $request->file('cover_image')->store('blog', 'public');
+            $data['cover_image'] = $this->images->replace($request->file('cover_image'), 'blog', $post->cover_image);
         }
         $data['tags'] = collect(explode(',', $request->input('tags', '')))
             ->map(fn ($t) => trim($t))
@@ -69,12 +74,16 @@ class BlogPostController extends Controller
             $data['published_at'] = now();
         }
         $post->update($data);
+
         return redirect()->route('admin.blog.index')->with('success', 'Post updated.');
     }
 
     public function destroy(BlogPost $post): RedirectResponse
     {
+        $coverImage = $post->cover_image;
         $post->delete();
+        $this->images->delete($coverImage);
+
         return back()->with('success', 'Post removed.');
     }
 
@@ -85,7 +94,7 @@ class BlogPostController extends Controller
             'title' => ['required', 'string', 'max:200'],
             'excerpt' => ['nullable', 'string', 'max:500'],
             'body' => ['required', 'string'],
-            'cover_image' => ['nullable', 'image', 'max:4096'],
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:8192'],
             'reading_minutes' => ['nullable', 'integer', 'min:1'],
             'is_featured' => ['nullable', 'boolean'],
             'status' => ['required', 'in:draft,published,archived'],

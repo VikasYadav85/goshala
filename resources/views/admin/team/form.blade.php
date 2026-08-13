@@ -23,7 +23,8 @@
         <div class="sm:col-span-2"><label class="form-label">Bio</label><textarea name="bio" rows="3" class="form-textarea">{{ old('bio', $member->bio) }}</textarea></div>
         <div class="sm:col-span-2">
             <label class="form-label">Photo</label>
-            <input type="file" name="photo" accept="image/*" class="form-input">
+            <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" class="form-input">
+            <p class="text-xs text-gray-500 mt-1">JPEG, PNG or WebP, max 8 MB. Stored automatically as optimized WebP.</p>
             @if ($member->photo)<img src="{{ asset('storage/' . $member->photo) }}" class="mt-2 w-24 h-24 rounded-full object-cover" alt="">@endif
         </div>
         <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="is_published" value="1" @checked(old('is_published', $member->is_published ?? true)) class="rounded"> Published</label>

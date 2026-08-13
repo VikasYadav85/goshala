@@ -35,6 +35,12 @@ seed existing users' roles so no current login breaks.
 - After domain live: submit sitemap in Google Search Console.
 
 ## Completed
+### WebP media optimization — 2026-08-13
+- All 9 admin image forms store optimized WebP via shared GD service (quality 82, max 1920px).
+- Gallery covers crop to 1280×720; replaced images are deleted only after successful new storage.
+- Gallery video uses validated external YouTube URLs; no server-side video files.
+- Focused tests: 12 passed (19 assertions); Vite build passed.
+
 ### Part B — SEO code (make site discoverable on Google)
 - Dynamic `/sitemap.xml` (static pages + published blog/campaigns/events/gallery albums).
 - `robots.txt`: add Sitemap directive, disallow /admin.

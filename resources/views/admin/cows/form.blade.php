@@ -49,7 +49,8 @@
 
         <div>
             <label class="form-label">Image</label>
-            <input type="file" name="image" accept="image/*" class="form-input">
+            <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="form-input">
+            <p class="text-xs text-gray-500 mt-1">JPEG, PNG or WebP, max 8 MB. Stored automatically as optimized WebP.</p>
             @if ($cow->image)<img src="{{ asset('storage/' . $cow->image) }}" class="mt-2 h-24 rounded-lg" alt="">@endif
         </div>
         <div class="space-y-2 mt-2">
