@@ -5,7 +5,7 @@ Rules added here prevent repeated mistakes. Each rule was born from an actual er
 (none yet)
 
 ## Common Pitfalls
-(none yet)
+- With `gh pr merge --repo`, always pass the PR number, URL, or branch explicitly; repository selection alone does not identify which PR to merge.
 
 ## Testing
 (none yet)

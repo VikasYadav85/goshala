@@ -34,7 +34,8 @@
         <div class="sm:col-span-2"><label class="form-label">Full description</label><textarea name="description" rows="6" class="form-textarea">{{ old('description', $event->description) }}</textarea></div>
         <div class="sm:col-span-2">
             <label class="form-label">Image</label>
-            <input type="file" name="image" accept="image/*" class="form-input">
+            <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="form-input">
+            <p class="text-xs text-gray-500 mt-1">JPEG, PNG or WebP, max 8 MB. Stored automatically as optimized WebP.</p>
             @if ($event->image)<img src="{{ asset('storage/' . $event->image) }}" class="mt-2 h-32 rounded-lg" alt="">@endif
         </div>
         <div class="sm:col-span-2 space-y-2">

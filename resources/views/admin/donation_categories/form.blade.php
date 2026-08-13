@@ -15,7 +15,8 @@
         <div class="sm:col-span-2"><label class="form-label">Description</label><textarea name="description" rows="4" class="form-textarea">{{ old('description', $category->description) }}</textarea></div>
         <div class="sm:col-span-2">
             <label class="form-label">Image</label>
-            <input type="file" name="image" accept="image/*" class="form-input">
+            <input type="file" name="image" accept="image/jpeg,image/png,image/webp" class="form-input">
+            <p class="text-xs text-gray-500 mt-1">JPEG, PNG or WebP, max 8 MB. Stored automatically as optimized WebP.</p>
             @if ($category->image)<img src="{{ asset('storage/' . $category->image) }}" class="mt-2 h-32 rounded-lg" alt="">@endif
         </div>
         <div><label class="form-label">Sort order</label><input type="number" name="sort_order" value="{{ old('sort_order', $category->sort_order) }}" class="form-input"></div>

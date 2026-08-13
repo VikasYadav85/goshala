@@ -14,7 +14,8 @@
         <div class="sm:col-span-2"><label class="form-label">Quote *</label><textarea name="quote" rows="4" required class="form-textarea">{{ old('quote', $testimonial->quote) }}</textarea></div>
         <div>
             <label class="form-label">Avatar</label>
-            <input type="file" name="avatar" accept="image/*" class="form-input">
+            <input type="file" name="avatar" accept="image/jpeg,image/png,image/webp" class="form-input">
+            <p class="text-xs text-gray-500 mt-1">JPEG, PNG or WebP, max 8 MB. Stored automatically as optimized WebP.</p>
             @if ($testimonial->avatar)<img src="{{ asset('storage/' . $testimonial->avatar) }}" class="mt-2 w-16 h-16 rounded-full" alt="">@endif
         </div>
         <div><label class="form-label">Sort order</label><input type="number" name="sort_order" value="{{ old('sort_order', $testimonial->sort_order) }}" class="form-input"></div>

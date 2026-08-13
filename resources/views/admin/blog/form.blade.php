@@ -31,7 +31,8 @@
         <div class="sm:col-span-2"><label class="form-label">Body *</label><textarea name="body" rows="12" required class="form-textarea font-mono text-sm">{{ old('body', $post->body) }}</textarea></div>
         <div class="sm:col-span-2">
             <label class="form-label">Cover image</label>
-            <input type="file" name="cover_image" accept="image/*" class="form-input">
+            <input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" class="form-input">
+            <p class="text-xs text-gray-500 mt-1">JPEG, PNG or WebP, max 8 MB. Stored automatically as optimized WebP.</p>
             @if ($post->cover_image)<img src="{{ asset('storage/' . $post->cover_image) }}" class="mt-2 h-32 rounded-lg" alt="">@endif
         </div>
         <div class="sm:col-span-2"><label class="form-label">Tags (comma separated)</label><input name="tags" value="{{ old('tags', is_array($post->tags) ? implode(', ', $post->tags) : '') }}" class="form-input"></div>

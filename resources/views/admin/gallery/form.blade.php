@@ -19,7 +19,7 @@
         <div class="sm:col-span-2">
             <label class="form-label">Cover image</label>
             <input type="file" name="cover_image" accept="image/jpeg,image/png,image/webp" class="form-input">
-            <p class="text-xs text-gray-500 mt-1">Recommended: 16:9 landscape (e.g. 1280×720). It is auto-cropped to fit the card. Min 640×360, max 4&nbsp;MB.</p>
+            <p class="text-xs text-gray-500 mt-1">JPEG, PNG or WebP, max 8 MB. Auto-cropped to 1280×720 and stored as optimized WebP.</p>
             @error('cover_image')<p class="text-xs text-red-600 mt-1">{{ $message }}</p>@enderror
             @if ($album->cover_image)<img src="{{ asset('storage/' . $album->cover_image) }}" class="mt-2 h-32 rounded-lg" alt="">@endif
         </div>

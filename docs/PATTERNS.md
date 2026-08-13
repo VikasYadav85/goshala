@@ -212,3 +212,20 @@ Flash keys are `success` and `error`. Validation errors surface via `$errors` in
   ```
 - Services resolved via the container (singleton in `AppServiceProvider`), not `new`. Models referenced via FQN imports at the top of the file.
 - JS uses ES module imports (`import QRCode from 'qrcode'`); `package.json` is `"type": "module"`.
+
+## 13. Image uploads and video media
+
+Validate uploads in the controller, then use the shared service rather than calling `UploadedFile::store()` directly:
+
+```php
+// app/Http/Controllers/Admin/CowController.php
+public function __construct(private readonly OptimizedImageStorage $images) {}
+
+$data['image'] = $this->images->replace(
+    $request->file('image'),
+    'cows',
+    $cow->image,
+);
+```
+
+`app/Services/OptimizedImageStorage.php` writes UUID-named WebP files at quality 82, limits the longest edge to 1920px, and can center-crop exact dimensions. New image forms must accept only JPEG, PNG, and WebP, validate MIME/size server-side, and use this service. Gallery videos are external YouTube URLs validated by `app/Rules/YouTubeUrl.php`; do not upload video files to this server.

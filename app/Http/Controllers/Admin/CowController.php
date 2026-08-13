@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cow;
 use App\Models\CowCategory;
+use App\Services\OptimizedImageStorage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,6 +13,8 @@ use Illuminate\View\View;
 
 class CowController extends Controller
 {
+    public function __construct(private readonly OptimizedImageStorage $images) {}
+
     public function index(Request $request): View
     {
         $cows = Cow::query()
@@ -28,7 +31,7 @@ class CowController extends Controller
     public function create(): View
     {
         return view('admin.cows.form', [
-            'cow' => new Cow(),
+            'cow' => new Cow,
             'categories' => CowCategory::orderBy('name')->get(),
         ]);
     }
@@ -36,10 +39,10 @@ class CowController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $this->validated($request);
-        $data['slug'] = Str::slug($data['name']) . '-' . Str::lower(Str::random(5));
+        $data['slug'] = Str::slug($data['name']).'-'.Str::lower(Str::random(5));
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('cows', 'public');
+            $data['image'] = $this->images->store($request->file('image'), 'cows');
         }
 
         Cow::create($data);
@@ -60,7 +63,7 @@ class CowController extends Controller
         $data = $this->validated($request);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('cows', 'public');
+            $data['image'] = $this->images->replace($request->file('image'), 'cows', $cow->image);
         }
 
         $cow->update($data);
@@ -70,7 +73,10 @@ class CowController extends Controller
 
     public function destroy(Cow $cow): RedirectResponse
     {
+        $image = $cow->image;
         $cow->delete();
+        $this->images->delete($image);
+
         return back()->with('success', 'Cow removed.');
     }
 
@@ -86,7 +92,7 @@ class CowController extends Controller
             'rescued_at' => ['nullable', 'date'],
             'rescue_story' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'max:4096'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:8192'],
             'monthly_sponsorship_amount' => ['required', 'integer', 'min:100'],
             'is_available_for_sponsorship' => ['nullable', 'boolean'],
             'is_featured' => ['nullable', 'boolean'],

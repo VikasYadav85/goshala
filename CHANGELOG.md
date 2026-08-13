@@ -5,6 +5,7 @@ Format: [DATE] [AUTHOR] Description
 ## [Unreleased]
 
 ### Added
+- Media optimization: every admin image upload now converts JPEG/PNG/WebP to WebP (quality 82), caps the longest edge at 1920px, uses UUID filenames, and removes replaced files safely. Gallery covers are center-cropped to 1280×720. Gallery videos remain external YouTube embeds with strict URL validation. Added 12 focused tests (19 assertions).
 - RBAC: role-based access control via `spatie/laravel-permission`. New "Access control" admin menu
   (super_admin only) — Users, Roles, and Permissions management:
   - `Admin\{User,Role,Permission}Controller` (resource CRUD) + Blade views under
