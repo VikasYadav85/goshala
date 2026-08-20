@@ -53,7 +53,7 @@
                 @php $trustAddress = ($trust['registered_office'] ?? null) ?: ($trust['address'] ?? null); @endphp
                 <div class="sub">
                     @if($trustAddress){{ $trustAddress }}<br>@endif
-                    @if($trust['email']){{ $trust['email'] }}@endif @if($trust['phone']) • {{ $trust['phone'] }}@endif
+                    @if($trust['email']){{ $trust['email'] }}@endif @if(!empty($trust['email2'])), {{ $trust['email2'] }}@endif @if($trust['phone']) • {{ $trust['phone'] }}@endif @if(!empty($trust['phone2'])), {{ $trust['phone2'] }}@endif
                 </div>
             </td>
             <td class="doc-title">
