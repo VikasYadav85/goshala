@@ -1,5 +1,11 @@
 import './bootstrap';
+import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
 import QRCode from 'qrcode';
+
+window.Alpine = Alpine;
+Alpine.plugin(collapse);
+Alpine.start();
 
 // Render any UPI QR codes on the page. An element with [data-upi-qr] whose
 // value is a upi:// intent string is turned into a scannable QR canvas.

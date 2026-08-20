@@ -4,7 +4,20 @@ Format: [DATE] [AUTHOR] Description
 
 ## [Unreleased]
 
+### Changed
+- Trust identity corrected to match the registered trust deed. Legal name is now
+  **Gopal Samarpan Sewa Charitable Trust** (was "Gopal Seva Samarpan Trust") across the
+  public site, admin panel, meta/OG/JSON-LD, 80G PDF receipt, and emails (config-driven).
+  Two addresses are now shown — **Goshala** (Jaunpur, UP – 222001) and **Registered Office**
+  (A-002, Somnath Apartment, …, Bhayandar East, Thane, MH – 401105, from the deed) — on the
+  contact page and footer; the 80G receipt uses the registered office as the official address
+  (new `TRUST_REGISTERED_OFFICE` env + `registered_office` site setting). Stale "Vrindavan,
+  Mathura" address removed. `publicSettings` now resolves lazily per view render (was shared once
+  at boot) so it reflects settings saved during a request. Covered by `TrustIdentityTest`.
+
 ### Added
+- Final client-delivery QA: form accessibility/validation and admin-login regression coverage. Full suite now passes 54 tests (176 assertions).
+- Alpine.js and its collapse plugin are bundled locally through Vite so mobile navigation and accordions do not depend on a third-party CDN.
 - Media optimization: every admin image upload now converts JPEG/PNG/WebP to WebP (quality 82), caps the longest edge at 1920px, uses UUID filenames, and removes replaced files safely. Gallery covers are center-cropped to 1280×720. Gallery videos remain external YouTube embeds with strict URL validation. Added 12 focused tests (19 assertions).
 - RBAC: role-based access control via `spatie/laravel-permission`. New "Access control" admin menu
   (super_admin only) — Users, Roles, and Permissions management:
@@ -43,7 +56,10 @@ Format: [DATE] [AUTHOR] Description
   receipt content, date + trust sign-off, footer) for a consistent look with the other emails.
 
 ### Fixed
-(none)
+- Admin login now always redirects authenticated users to `/admin`, ignoring stale frontend intended URLs.
+- Permission create/edit pages no longer return 500 from an unescaped `@can` example.
+- Mobile overflow on the public newsletter footer, admin dashboard, donation/volunteer/message detail cards, filters, and all wide admin tables.
+- Every visible public/admin form control now has an accessible label; public/admin forms were verified at 320, 390, 768, and 1440 widths.
 
 ### Removed
 (none)

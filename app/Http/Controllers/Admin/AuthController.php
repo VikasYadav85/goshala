@@ -31,6 +31,7 @@ class AuthController extends Controller
         $user = Auth::user();
         if (! $user->is_active || ! $user->canManageContent()) {
             Auth::logout();
+
             return back()
                 ->withInput($request->only('email'))
                 ->withErrors(['email' => 'Your account is not authorised to access the admin panel.']);
@@ -38,7 +39,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.dashboard'))->with('success', 'Welcome back, '.$user->name.'.');
+        return redirect()->route('admin.dashboard')->with('success', 'Welcome back, '.$user->name.'.');
     }
 
     public function logout(Request $request): RedirectResponse

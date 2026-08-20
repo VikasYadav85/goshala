@@ -152,18 +152,17 @@ A feature spans the standard Laravel layout, with controllers split into `Public
 **PHPUnit** (not Pest). Tests extend `tests/TestCase.php`; suites `Unit`/`Feature` run on in-memory SQLite (`phpunit.xml`). Run: `composer test`, single: `php artisan test --filter=Name`.
 
 ```php
-// tests/Feature/ExampleTest.php
-class ExampleTest extends TestCase
+// tests/Feature/FormValidationTest.php
+#[DataProvider('publicForms')]
+public function test_public_forms_reject_missing_required_fields(string $route, array $errors): void
 {
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
-        $response->assertStatus(200);
-    }
+    $this->from(route('home'))->post(route($route), [])
+        ->assertRedirect(route('home'))
+        ->assertSessionHasErrors($errors);
 }
 ```
 
-> ⚠️ Current coverage = scaffold stubs only. New feature tests should use `RefreshDatabase` and live in `tests/Feature/`. Method names: `test_snake_case` or `#[Test]` attribute.
+Feature tests use `RefreshDatabase`; reusable cases use PHPUnit `#[DataProvider]`. Every QA-found bug gets a regression test.
 
 ## 8. Background jobs / queue tasks
 
@@ -171,12 +170,13 @@ class ExampleTest extends TestCase
 
 ## 9. Frontend structure
 
-Server-rendered Blade + Tailwind v4 + CDN Alpine. No SPA / JS component framework.
+Server-rendered Blade + Tailwind v4 + bundled Alpine. No SPA / JS component framework.
 
 - **Layouts:** `resources/views/public/layout.blade.php`, `admin/layout.blade.php`; assets via `@vite(['resources/css/app.css', 'resources/js/app.js'])`.
 - **CSS:** Tailwind v4 configured **in-CSS** (`resources/css/app.css` — `@import 'tailwindcss';`, `@source`, `@theme { --color-saffron-*, --font-display ... }`). No `tailwind.config.js`.
-- **JS:** minimal. `resources/js/app.js` imports `qrcode` and renders UPI QR onto `[data-upi-qr]` at `DOMContentLoaded`.
-- **Alpine 3** loaded via CDN `<script defer src="https://unpkg.com/alpinejs@3.x.x/...">` — not bundled.
+- **JS:** `resources/js/app.js` starts Alpine + `@alpinejs/collapse`, then renders UPI QR onto `[data-upi-qr]`.
+- **Forms:** visible inputs/selects/textareas use a unique `id` and matching `<label for="...">`; checkbox text may wrap the input inside `<label>`.
+- **Responsive tables:** wide admin tables sit inside `.overflow-x-auto`; cards/grids that contain wide content use `.min-w-0`.
 - **Shared partials:** `resources/views/public/partials/*` (`header`, `footer`, `page-hero`, `campaign-card`, `donate-cta`).
 
 ## 10. Response formatting (success & error)
@@ -211,7 +211,7 @@ Flash keys are `success` and `error`. Validation errors surface via `$errors` in
   public function __construct(private readonly RazorpayService $razorpay) {}
   ```
 - Services resolved via the container (singleton in `AppServiceProvider`), not `new`. Models referenced via FQN imports at the top of the file.
-- JS uses ES module imports (`import QRCode from 'qrcode'`); `package.json` is `"type": "module"`.
+- JS uses ES module imports (`import Alpine from 'alpinejs'`, `import QRCode from 'qrcode'`); `package.json` is `"type": "module"`.
 
 ## 13. Image uploads and video media
 

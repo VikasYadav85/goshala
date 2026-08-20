@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login · Gopal Seva Samarpan Trust</title>
+    <title>Admin Login · Gopal Samarpan Sewa Charitable Trust</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -11,9 +11,9 @@
     <div class="w-full max-w-md">
         <div class="card-soft p-8">
             <div class="text-center mb-6">
-                <img src="{{ asset('img/logo.png') }}" alt="Gopal Seva Samarpan Trust" class="h-24 w-auto mx-auto mb-3">
+                <img src="{{ asset('img/logo.png') }}" alt="Gopal Samarpan Sewa Charitable Trust" class="h-24 w-auto mx-auto mb-3">
                 <h1 class="font-display text-2xl font-bold text-saffron-900">Admin Sign-in</h1>
-                <p class="text-sm text-saffron-700 mt-1">Gopal Seva Samarpan Trust</p>
+                <p class="text-sm text-saffron-700 mt-1">Gopal Samarpan Sewa Charitable Trust</p>
             </div>
 
             @if (session('error'))
@@ -23,13 +23,13 @@
             <form method="POST" action="{{ route('admin.login.post') }}" class="space-y-4">
                 @csrf
                 <div>
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" required value="{{ old('email') }}" class="form-input" autofocus>
+                    <label for="admin_email" class="form-label">Email</label>
+                    <input id="admin_email" type="email" name="email" required value="{{ old('email') }}" class="form-input" autocomplete="email" autofocus>
                     @error('email')<div class="form-error">{{ $message }}</div>@enderror
                 </div>
                 <div>
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" required class="form-input">
+                    <label for="admin_password" class="form-label">Password</label>
+                    <input id="admin_password" type="password" name="password" required class="form-input" autocomplete="current-password">
                 </div>
                 <label class="flex items-center gap-2 text-sm text-saffron-900/80">
                     <input type="checkbox" name="remember" class="rounded border-saffron-300 text-saffron-600">

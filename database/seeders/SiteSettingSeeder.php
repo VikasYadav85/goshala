@@ -14,11 +14,12 @@ class SiteSettingSeeder extends Seeder
             ['contact', 'contact_phone',    '+91-98765-43210', 'string',  'Phone',    'Primary phone shown across the site.'],
             ['contact', 'contact_email',    'seva@gopalsevatrust.org', 'string', 'Email',    'Primary email shown across the site.'],
             ['contact', 'contact_whatsapp', '+91-98765-43210', 'string',  'WhatsApp', 'WhatsApp number — used for the floating chat link.'],
-            ['contact', 'contact_address',  'Gopal Seva Samarpan Trust, Vrindavan, Mathura, Uttar Pradesh - 281121', 'text', 'Address', 'Goshala address.'],
+            ['contact', 'contact_address',  'Jaunpur, Uttar Pradesh - 222001', 'text', 'Goshala address', 'Goshala / visiting address shown on the contact page and footer.'],
+            ['contact', 'registered_office', 'A-002, Somnath Apartment, S.V. Cross Road, Chandresh Agency, Asha Nagar, Bhayandar East, Thane, Maharashtra - 401105', 'text', 'Registered office', 'Registered office address (from the trust deed) — shown on the contact page, footer, and 80G receipt.'],
 
             // brand group
             ['brand', 'site_tagline',  'Serving Gau Mata with Devotion, Compassion & Humanity.', 'string', 'Site tagline', null],
-            ['brand', 'footer_about',  'Gopal Seva Samarpan Trust is a sanctuary for rescued and abandoned cows, rooted in spiritual values and committed to transparency.', 'text', 'Footer about', null],
+            ['brand', 'footer_about',  'Gopal Samarpan Sewa Charitable Trust is a sanctuary for rescued and abandoned cows, rooted in spiritual values and committed to transparency.', 'text', 'Footer about', null],
 
             // social group
             ['social', 'social_instagram', 'https://instagram.com/gopalsevatrust', 'string', 'Instagram URL', null],

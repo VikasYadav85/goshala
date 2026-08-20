@@ -12,17 +12,18 @@
             <h2 class="font-display text-lg font-bold mb-4 capitalize">{{ \Illuminate\Support\Str::title(str_replace('_', ' ', $group)) }}</h2>
             <div class="space-y-4">
                 @foreach ($rows as $row)
+                    @php($settingId = 'setting_'.$row->id)
                     <div>
-                        <label class="form-label">{{ $row->label ?: \Illuminate\Support\Str::title(str_replace('_', ' ', $row->key)) }}</label>
+                        <label for="{{ $settingId }}" class="form-label">{{ $row->label ?: \Illuminate\Support\Str::title(str_replace('_', ' ', $row->key)) }}</label>
                         @if ($row->type === 'text' || $row->type === 'html')
-                            <textarea name="settings[{{ $row->key }}]" rows="3" class="form-textarea">{{ $row->value }}</textarea>
+                            <textarea id="{{ $settingId }}" name="settings[{{ $row->key }}]" rows="3" class="form-textarea">{{ $row->value }}</textarea>
                         @elseif ($row->type === 'boolean')
-                            <select name="settings[{{ $row->key }}]" class="form-select">
+                            <select id="{{ $settingId }}" name="settings[{{ $row->key }}]" class="form-select">
                                 <option value="1" @selected(filter_var($row->value, FILTER_VALIDATE_BOOLEAN))>Enabled</option>
                                 <option value="0" @selected(! filter_var($row->value, FILTER_VALIDATE_BOOLEAN))>Disabled</option>
                             </select>
                         @else
-                            <input name="settings[{{ $row->key }}]" value="{{ $row->value }}" class="form-input">
+                            <input id="{{ $settingId }}" name="settings[{{ $row->key }}]" value="{{ $row->value }}" class="form-input">
                         @endif
                         @if ($row->description)<p class="text-xs text-gray-500 mt-1">{{ $row->description }}</p>@endif
                     </div>

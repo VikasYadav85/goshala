@@ -4,18 +4,21 @@
 
 @section('content')
 
-<form method="GET" class="admin-card p-4 mb-5 flex flex-wrap gap-3">
-    <input name="search" value="{{ request('search') }}" placeholder="Search by name, email, city…" class="form-input flex-1 min-w-[200px]">
-    <select name="status" class="form-select max-w-[180px]">
+<form method="GET" class="admin-card p-4 mb-5 flex flex-col sm:flex-row gap-3">
+    <label for="volunteer_search" class="sr-only">Search volunteers</label>
+    <input id="volunteer_search" name="search" value="{{ request('search') }}" placeholder="Search by name, email, city…" class="form-input flex-1 min-w-0">
+    <label for="volunteer_status_filter" class="sr-only">Filter by volunteer status</label>
+    <select id="volunteer_status_filter" name="status" class="form-select w-full sm:max-w-[180px]">
         <option value="">All statuses</option>
         @foreach (['pending','approved','active','inactive','rejected'] as $s)
             <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
         @endforeach
     </select>
-    <button class="btn btn-primary text-sm">Filter</button>
+    <button class="btn btn-primary text-sm w-full sm:w-auto">Filter</button>
 </form>
 
 <div class="admin-card overflow-hidden">
+    <div class="overflow-x-auto">
     <table class="w-full admin-table">
         <thead class="bg-gray-50">
             <tr>
@@ -49,6 +52,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     <div class="px-5 py-3 border-t border-gray-100">{{ $volunteers->links() }}</div>
 </div>
 

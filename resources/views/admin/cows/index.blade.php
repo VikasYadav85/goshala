@@ -11,7 +11,8 @@
 </x-admin.page-header>
 
 <form method="GET" class="admin-card p-4 mb-5">
-    <input name="search" value="{{ request('search') }}" placeholder="Search by name…" class="form-input">
+    <label for="cow_search" class="sr-only">Search cows</label>
+    <input id="cow_search" name="search" value="{{ request('search') }}" placeholder="Search by name…" class="form-input">
 </form>
 
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

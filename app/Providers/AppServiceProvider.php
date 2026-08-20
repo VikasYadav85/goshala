@@ -30,8 +30,10 @@ class AppServiceProvider extends ServiceProvider
         // super_admin bypasses every gate/permission check (present and future).
         Gate::before(fn (User $user, string $ability) => $user->hasRole(User::ROLE_SUPER_ADMIN) ? true : null);
 
-        // Make site-wide values available to every view
-        View::share('publicSettings', $this->safeSettings());
+        // Make site-wide values available to every view. Resolved lazily per render
+        // (not once at boot) so it reflects settings written during the request —
+        // and reads from the cached settings collection, so it stays cheap.
+        View::composer('*', fn ($view) => $view->with('publicSettings', $this->safeSettings()));
 
         // Brevo HTTP-API mail transport (this host blocks outbound SMTP).
         Mail::extend('brevo', function () {
@@ -49,8 +51,9 @@ class AppServiceProvider extends ServiceProvider
                 'email' => SiteSetting::get('contact_email', env('TRUST_EMAIL')),
                 'whatsapp' => SiteSetting::get('contact_whatsapp', env('TRUST_WHATSAPP')),
                 'address' => SiteSetting::get('contact_address', env('TRUST_ADDRESS')),
+                'registered_office' => SiteSetting::get('registered_office', env('TRUST_REGISTERED_OFFICE')),
                 'tagline' => SiteSetting::get('site_tagline', 'Serving Gau Mata with Devotion, Compassion & Humanity.'),
-                'footer_about' => SiteSetting::get('footer_about', 'Gopal Seva Samarpan Trust is a sanctuary for rescued and abandoned cows, rooted in spiritual values and driven by transparency.'),
+                'footer_about' => SiteSetting::get('footer_about', 'Gopal Samarpan Sewa Charitable Trust is a sanctuary for rescued and abandoned cows, rooted in spiritual values and driven by transparency.'),
                 'social' => [
                     'instagram' => SiteSetting::get('social_instagram', '#'),
                     'facebook'  => SiteSetting::get('social_facebook', '#'),
@@ -64,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
                 'email' => env('TRUST_EMAIL'),
                 'whatsapp' => env('TRUST_WHATSAPP'),
                 'address' => env('TRUST_ADDRESS'),
+                'registered_office' => env('TRUST_REGISTERED_OFFICE'),
                 'tagline' => 'Serving Gau Mata with Devotion, Compassion & Humanity.',
                 'footer_about' => '',
                 'social' => ['instagram' => '#', 'facebook' => '#', 'youtube' => '#', 'twitter' => '#'],

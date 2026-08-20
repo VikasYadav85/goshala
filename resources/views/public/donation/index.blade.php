@@ -69,15 +69,15 @@
 {{-- Custom amount --}}
 <section class="py-16 bg-saffron-gradient">
     <div class="container mx-auto px-4">
-        <div class="card-soft p-8 max-w-2xl mx-auto text-center">
+        <div class="card-soft p-5 sm:p-8 max-w-2xl mx-auto text-center">
             <p class="uppercase text-xs tracking-widest text-saffron-600 mb-2">Or give what feels right</p>
             <h3 class="font-display text-2xl font-bold text-saffron-900 mb-4">Make a Custom Donation</h3>
             <form action="{{ route('donations.create') }}" method="GET" class="flex flex-wrap gap-3 items-end justify-center">
-                <div class="flex-1 min-w-[200px] text-left">
-                    <label class="form-label">Amount (₹)</label>
-                    <input type="number" name="amount" min="10" value="1100" class="form-input">
+                <div class="w-full sm:flex-1 sm:min-w-[200px] text-left min-w-0">
+                    <label for="custom_donation_amount" class="form-label">Amount (₹)</label>
+                    <input id="custom_donation_amount" type="number" name="amount" min="10" value="1100" class="form-input">
                 </div>
-                <button class="btn btn-primary">Continue →</button>
+                <button class="btn btn-primary w-full sm:w-auto">Continue →</button>
             </form>
             <p class="text-xs text-saffron-700 mt-4">100% of donations are utilised toward Gau Seva. 80G tax receipt issued on every successful donation.</p>
         </div>
@@ -100,7 +100,7 @@
         <div class="card-soft p-6">
             <h3 class="font-display text-lg font-semibold text-saffron-900 mb-3">Bank Transfer Details</h3>
             <dl class="text-sm space-y-2 text-saffron-900/80">
-                <div class="flex justify-between"><dt class="text-saffron-700">Account Name</dt><dd>Gopal Seva Samarpan Trust</dd></div>
+                <div class="flex justify-between"><dt class="text-saffron-700">Account Name</dt><dd>Gopal Samarpan Sewa Charitable Trust</dd></div>
                 <div class="flex justify-between"><dt class="text-saffron-700">Account No.</dt><dd>50100-XXX-XXX-XX</dd></div>
                 <div class="flex justify-between"><dt class="text-saffron-700">IFSC</dt><dd>HDFC0001234</dd></div>
                 <div class="flex justify-between"><dt class="text-saffron-700">Branch</dt><dd>Vrindavan, Mathura</dd></div>

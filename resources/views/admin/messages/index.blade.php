@@ -4,17 +4,19 @@
 
 @section('content')
 
-<form method="GET" class="admin-card p-4 mb-5 flex flex-wrap gap-3">
-    <select name="status" class="form-select max-w-[180px]">
+<form method="GET" class="admin-card p-4 mb-5 flex flex-col sm:flex-row gap-3">
+    <label for="message_status_filter" class="sr-only">Filter by message status</label>
+    <select id="message_status_filter" name="status" class="form-select w-full sm:max-w-[180px]">
         <option value="">All statuses</option>
         @foreach (['new','read','replied','spam','closed'] as $s)
             <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
         @endforeach
     </select>
-    <button class="btn btn-primary text-sm">Filter</button>
+    <button class="btn btn-primary text-sm w-full sm:w-auto">Filter</button>
 </form>
 
 <div class="admin-card overflow-hidden">
+    <div class="overflow-x-auto">
     <table class="w-full admin-table">
         <thead class="bg-gray-50">
             <tr>
@@ -47,6 +49,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     <div class="px-5 py-3 border-t border-gray-100">{{ $messages->links() }}</div>
 </div>
 

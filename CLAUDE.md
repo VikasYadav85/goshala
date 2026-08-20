@@ -8,7 +8,7 @@ GSSTG (Gopal Seva Samarpan Trust) is a Laravel 12 platform for a goshala / cow-r
 # Tech Stack
 - Laravel 12, PHP 8.2+ · Eloquent ORM
 - DB: SQLite (local) / MySQL (prod); sessions, cache, queue all use the `database` driver
-- Tailwind CSS v4 + Vite 7; Alpine.js 3 (CDN); minimal bundled JS (`qrcode` for UPI)
+- Tailwind CSS v4 + Vite 7; locally bundled Alpine.js 3 + collapse; `qrcode` for UPI
 - DomPDF (80G receipts) · Razorpay + UPI payments · Gmail SMTP
 - PHPUnit 11 (no Pest) · custom session-based admin auth
 
@@ -46,7 +46,7 @@ Two surfaces: public site (`Public\*` controllers) and `/admin` panel (`Admin\*`
 See docs/PATTERNS.md for examples with real code (routes, queries, error handling, middleware, config access, responses, naming).
 
 # Testing
-PHPUnit 11. Tests live in `tests/Feature/` and `tests/Unit/`, run on in-memory SQLite. Run `composer test`, or `php artisan test --filter=Name` for one. Coverage is currently scaffold-only — add Feature tests for the donation flow and admin gate first.
+PHPUnit 11. Tests live in `tests/Feature/` and `tests/Unit/`, run on in-memory SQLite. Run `composer test`, or `php artisan test --filter=Name` for one. Coverage includes RBAC, forms, redirects, mail, SEO, and media behavior.
 
 # Task Management
 - Before starting work, write plan to tasks/todo.md

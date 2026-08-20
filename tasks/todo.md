@@ -1,6 +1,15 @@
 # Current Tasks
 
 ## In Progress
+### Client delivery QA — 2026-08-14 (awaiting APPROVED)
+- Fix admin login so authenticated/admin logins always land on `/admin`.
+- Fix permission create/edit 500 caused by an unescaped Blade directive example.
+- Fix 320/390px overflow in the public footer, admin dashboard, and donation detail.
+- Associate every visible public/admin form control with an accessible label.
+- Add regression, form-render, validation, and responsive-markup tests.
+- Re-test every public/admin page at 320, 390, 768, and 1440px; build; deploy; live smoke-test.
+- Generate `docs/QA-SHEET.md`, update project docs/changelog, and log deployment.
+
 ### RBAC — DONE locally (pending server rollout)
 Built + tested locally (11 tests pass). Spatie installed, config/rbac.php + RolePermissionSeeder,
 Users/Roles/Permissions CRUD + views, per-section permission middleware, nav filtered, super_admin

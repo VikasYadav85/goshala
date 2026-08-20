@@ -2,13 +2,16 @@
 Rules added here prevent repeated mistakes. Each rule was born from an actual error.
 
 ## Code Patterns
-(none yet)
+- Escape literal Blade directive examples with `@@` (for example `@@can`) so documentation text is not compiled as an unmatched directive.
+- Bundle interaction-critical JavaScript locally; a CDN outage must not break mobile navigation or admin controls.
 
 ## Common Pitfalls
 - With `gh pr merge --repo`, always pass the PR number, URL, or branch explicitly; repository selection alone does not identify which PR to merge.
 
 ## Testing
 - Production uses `composer install --no-dev`, so `php artisan test` is unavailable there. Run PHPUnit locally; on production use a direct framework-booted smoke test and HTTP health checks.
+- Responsive QA must include 320, 390, 768, and 1440 widths; scan document overflow, broken images, accessible control names, and wide-table scroll containers.
+- After automated geometry scans, click stateful UI controls and visually inspect screenshots; a layout can pass width checks while an unloaded JS dependency leaves it unusable.
 
 ## Dependencies / Deploy
 - Prod runs PHP 8.2.31; local is PHP 8.3+. `composer require` on local can lock a package

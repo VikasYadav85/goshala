@@ -9,8 +9,8 @@
     @if ($role->exists) @method('PUT') @endif
 
     <div class="max-w-md">
-        <label class="form-label">Role key *</label>
-        <input name="name" required value="{{ old('name', $role->name) }}" class="form-input"
+        <label for="role_name" class="form-label">Role key *</label>
+        <input id="role_name" name="name" required value="{{ old('name', $role->name) }}" class="form-input"
                @readonly($role->exists && in_array($role->name, ['super_admin','admin','editor','staff'], true))
                placeholder="e.g. accountant">
         <p class="text-xs text-gray-500 mt-1">Lowercase letters, numbers, hyphen/underscore. Built-in role keys can't be renamed.</p>

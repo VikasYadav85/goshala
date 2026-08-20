@@ -7,6 +7,7 @@
 </x-admin.page-header>
 
 <div class="admin-card overflow-hidden">
+    <div class="overflow-x-auto">
     <table class="w-full admin-table">
         <thead class="bg-gray-50">
             <tr><th class="text-left px-5 py-3">Name</th><th class="text-left px-5 py-3">Default</th><th class="text-left px-5 py-3">Suggested</th><th class="text-left px-5 py-3">Status</th><th></th></tr>
@@ -36,6 +37,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     <div class="px-5 py-3 border-t border-gray-100">{{ $categories->links() }}</div>
 </div>
 @endsection

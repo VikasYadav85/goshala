@@ -10,6 +10,7 @@
     @foreach ($grouped as $group => $permissions)
         <div class="admin-card overflow-hidden">
             <div class="px-5 py-3 bg-gray-50 text-xs uppercase tracking-widest text-gray-500 font-semibold">{{ $group }}</div>
+            <div class="overflow-x-auto">
             <table class="w-full admin-table">
                 <tbody class="divide-y divide-gray-100">
                     @foreach ($permissions as $permission)
@@ -32,6 +33,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     @endforeach
 </div>

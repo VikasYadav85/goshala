@@ -1,13 +1,13 @@
 @extends('public.layout')
 @section('title', 'About Us — Our Heart and Heritage')
-@section('meta_description', 'Born from devotion, driven by duty — read the story of Gopal Seva Samarpan Trust, our trustees and our certifications.')
+@section('meta_description', 'Born from devotion, driven by duty — read the story of Gopal Samarpan Sewa Charitable Trust, our trustees and our certifications.')
 
 @section('content')
 
 @include('public.partials.page-hero', [
     'eyebrow' => 'Our heart & heritage',
     'title' => 'Born from <span class="text-saffron-200 text-devanagari">सेवा</span>,<br>Driven by Duty.',
-    'subtitle' => 'Gopal Seva Samarpan Trust was founded with a single vision — to revive the culture of Gau Seva in its purest form.',
+    'subtitle' => 'Gopal Samarpan Sewa Charitable Trust was founded with a single vision — to revive the culture of Gau Seva in its purest form.',
 ])
 
 {{-- Story --}}

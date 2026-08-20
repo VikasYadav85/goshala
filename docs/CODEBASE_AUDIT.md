@@ -33,7 +33,7 @@ Laravel 12 platform for a goshala / cow-rescue NGO. Public marketing + donation 
 - **ORM/DB:** Eloquent. Default `sqlite` (`database/database.sqlite`); production = MySQL (`gopal_seva`). 21 domain tables + 7 framework tables.
 - **Queue:** `database` driver (jobs table). **Cache:** `database`. **Session:** `database`.
 - **Auth:** custom session-based admin auth (`Admin\AuthController` + `EnsureUserIsAdmin` middleware), Laravel `auth`/`guest` guards. Roles: `super_admin`, `admin`, `editor`, `staff`. BCrypt rounds 12.
-- **Frontend:** Vite `^7` + `laravel-vite-plugin ^2`, Tailwind CSS `^4` (`@tailwindcss/vite`, in-CSS config, no `tailwind.config.js`), Alpine.js 3 via **CDN** (not bundled). Bundled JS deps: `axios`, `qrcode`.
+- **Frontend:** Vite `^7` + `laravel-vite-plugin ^2`, Tailwind CSS `^4` (`@tailwindcss/vite`, in-CSS config, no `tailwind.config.js`), locally bundled Alpine.js 3 + collapse. Bundled JS deps: `alpinejs`, `@alpinejs/collapse`, `axios`, `qrcode`.
 - **Notable PHP libs:** `barryvdh/laravel-dompdf ^3.1` (80G receipt PDFs), `laravel/tinker`.
 - **Testing:** PHPUnit `^11.5` (no Pest). Pint/Pail/Sail/Collision/Mockery/Faker dev tooling.
 

@@ -37,9 +37,9 @@
     @endforeach
 </div>
 
-<div class="grid lg:grid-cols-3 gap-6">
+<div class="grid lg:grid-cols-3 gap-6 min-w-0">
     {{-- Recent donations --}}
-    <div class="lg:col-span-2 admin-card">
+    <div class="lg:col-span-2 admin-card min-w-0">
         <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
             <h2 class="font-display text-lg font-semibold">Recent successful donations</h2>
             <a href="{{ route('admin.donations.index') }}" class="text-sm text-saffron-700 hover:text-saffron-900">View all →</a>
@@ -79,7 +79,7 @@
     </div>
 
     {{-- Side panels --}}
-    <div class="space-y-6">
+    <div class="space-y-6 min-w-0">
         <div class="admin-card">
             <div class="px-5 py-4 border-b border-gray-100">
                 <h2 class="font-display text-lg font-semibold">Recent volunteers</h2>

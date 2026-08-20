@@ -12,10 +12,11 @@
 <section class="py-12">
     <div class="container mx-auto px-4 grid lg:grid-cols-4 gap-8">
         <main class="lg:col-span-3">
-            <form method="GET" class="flex gap-2 mb-6">
-                <input name="q" value="{{ request('q') }}" placeholder="Search articles…" class="form-input">
+            <form method="GET" class="flex flex-col sm:flex-row gap-2 mb-6">
+                <label for="blog_search" class="sr-only">Search articles</label>
+                <input id="blog_search" name="q" value="{{ request('q') }}" placeholder="Search articles…" class="form-input min-w-0">
                 @if (request('category'))<input type="hidden" name="category" value="{{ request('category') }}">@endif
-                <button class="btn btn-primary">Search</button>
+                <button class="btn btn-primary w-full sm:w-auto">Search</button>
             </form>
 
             <div class="grid sm:grid-cols-2 gap-6">

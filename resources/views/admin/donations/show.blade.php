@@ -6,11 +6,11 @@
 
 <a href="{{ route('admin.donations.index') }}" class="text-sm text-saffron-700 hover:text-saffron-900">← Back to all donations</a>
 
-<div class="grid lg:grid-cols-3 gap-6 mt-4">
-    <div class="lg:col-span-2 admin-card p-6">
+<div class="grid lg:grid-cols-3 gap-6 mt-4 min-w-0">
+    <div class="lg:col-span-2 admin-card p-4 sm:p-6 min-w-0">
         <h2 class="font-display text-xl font-bold mb-4">Donor &amp; payment details</h2>
-        <dl class="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
-            <dt class="text-gray-500">Reference</dt><dd class="font-mono">{{ $donation->reference_no }}</dd>
+        <dl class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-sm min-w-0">
+            <dt class="text-gray-500">Reference</dt><dd class="font-mono break-all min-w-0">{{ $donation->reference_no }}</dd>
             <dt class="text-gray-500">Donor</dt><dd>{{ $donation->donor_name }}</dd>
             <dt class="text-gray-500">Email</dt><dd>{{ $donation->donor_email }}</dd>
             <dt class="text-gray-500">Phone</dt><dd>{{ $donation->donor_phone ?: '—' }}</dd>
@@ -21,13 +21,13 @@
             <dt class="text-gray-500">Frequency</dt><dd>{{ \Illuminate\Support\Str::title(str_replace('_', ' ', $donation->frequency)) }}</dd>
             <dt class="text-gray-500">Method</dt><dd>{{ \Illuminate\Support\Str::title($donation->payment_method) }}</dd>
             @if (data_get($donation->payment_meta, 'upi_reference'))
-                <dt class="text-gray-500">UPI reference (UTR)</dt><dd class="font-mono text-xs font-semibold text-saffron-800">{{ data_get($donation->payment_meta, 'upi_reference') }}</dd>
+                <dt class="text-gray-500">UPI reference (UTR)</dt><dd class="font-mono text-xs font-semibold text-saffron-800 break-all min-w-0">{{ data_get($donation->payment_meta, 'upi_reference') }}</dd>
                 <dt class="text-gray-500">UPI app</dt><dd>{{ data_get($donation->payment_meta, 'upi_app') ?: '—' }}</dd>
-                <dt class="text-gray-500">Paid to VPA</dt><dd class="font-mono text-xs">{{ data_get($donation->payment_meta, 'upi_vpa') ?: '—' }}</dd>
+                <dt class="text-gray-500">Paid to VPA</dt><dd class="font-mono text-xs break-all min-w-0">{{ data_get($donation->payment_meta, 'upi_vpa') ?: '—' }}</dd>
                 <dt class="text-gray-500">Reported at</dt><dd class="text-xs">{{ data_get($donation->payment_meta, 'reported_at') ?: '—' }}</dd>
             @else
-                <dt class="text-gray-500">Razorpay order</dt><dd class="font-mono text-xs">{{ $donation->razorpay_order_id ?: '—' }}</dd>
-                <dt class="text-gray-500">Razorpay payment</dt><dd class="font-mono text-xs">{{ $donation->razorpay_payment_id ?: '—' }}</dd>
+                <dt class="text-gray-500">Razorpay order</dt><dd class="font-mono text-xs break-all min-w-0">{{ $donation->razorpay_order_id ?: '—' }}</dd>
+                <dt class="text-gray-500">Razorpay payment</dt><dd class="font-mono text-xs break-all min-w-0">{{ $donation->razorpay_payment_id ?: '—' }}</dd>
             @endif
             <dt class="text-gray-500">Paid at</dt><dd>{{ optional($donation->paid_at)->format('d M Y, h:i A') ?: '—' }}</dd>
 
@@ -41,12 +41,12 @@
         </dl>
     </div>
 
-    <form method="POST" action="{{ route('admin.donations.update', $donation) }}" class="admin-card p-6 h-fit">
+    <form method="POST" action="{{ route('admin.donations.update', $donation) }}" class="admin-card p-4 sm:p-6 h-fit min-w-0">
         @csrf
         @method('PATCH')
         <h3 class="font-display text-lg font-bold mb-4">Update status</h3>
-        <label class="form-label">Payment status</label>
-        <select name="payment_status" class="form-select mb-4">
+        <label for="payment_status" class="form-label">Payment status</label>
+        <select id="payment_status" name="payment_status" class="form-select mb-4">
             @foreach (['pending','processing','success','failed','refunded'] as $s)
                 <option value="{{ $s }}" @selected($donation->payment_status === $s)>{{ ucfirst($s) }}</option>
             @endforeach

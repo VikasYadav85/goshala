@@ -1,6 +1,6 @@
 @extends('public.layout')
 @section('title', 'Home — Serving Gau Mata with Devotion')
-@section('meta_description', 'Gopal Seva Samarpan Trust serves rescued cows with devotion, medical care and shelter. Donate, sponsor a cow, or volunteer to join our spiritual seva.')
+@section('meta_description', 'Gopal Samarpan Sewa Charitable Trust serves rescued cows with devotion, medical care and shelter. Donate, sponsor a cow, or volunteer to join our spiritual seva.')
 
 @section('content')
 
@@ -23,7 +23,7 @@
                 with Devotion, Compassion &amp; Humanity.
             </h1>
             <p class="text-lg text-saffron-50/95 max-w-2xl mb-8 leading-relaxed">
-                Join Gopal Seva Samarpan Trust in protecting the sacred soul of Bharat.
+                Join Gopal Samarpan Sewa Charitable Trust in protecting the sacred soul of Bharat.
                 From rescue to rehabilitation, we ensure every cow lives with dignity and love.
             </p>
             <div class="flex flex-wrap gap-3">
@@ -65,7 +65,7 @@
             <p class="uppercase text-xs tracking-widest text-saffron-600 mb-2">A Sanctuary of Faith and Protection</p>
             <h2 class="font-display text-3xl md:text-4xl font-bold text-saffron-900 mb-5 heading-underline">Who we are</h2>
             <p class="text-saffron-900/80 leading-relaxed mb-4">
-                Gopal Seva Samarpan Trust is more than just an NGO; it is a movement dedicated to the service of
+                Gopal Samarpan Sewa Charitable Trust is more than just an NGO; it is a movement dedicated to the service of
                 <span class="text-devanagari font-semibold">नंदी</span> and
                 <span class="text-devanagari font-semibold">गौ माता</span>. Rooted in spiritual values and driven by
                 modern transparency, we provide a permanent home to abandoned, sick, and rescued cattle.

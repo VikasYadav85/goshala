@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Admin') · Gopal Seva Samarpan Trust</title>
+    <title>@yield('title', 'Admin') · Gopal Samarpan Sewa Charitable Trust</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 h-full font-sans" x-data="{ sidebarOpen: false }">
 
@@ -21,7 +20,7 @@
                     <img src="{{ asset('img/logo-mark.png') }}" alt="" class="w-9 h-9 object-contain">
                 </div>
                 <div>
-                    <div class="font-display font-semibold leading-tight">Gopal Seva Samarpan Trust</div>
+                    <div class="font-display font-semibold leading-tight">Gopal Samarpan Sewa Charitable Trust</div>
                     <div class="text-xs text-saffron-300">Admin Panel</div>
                 </div>
             </a>
@@ -115,7 +114,7 @@
                     <h1 class="font-display text-xl text-gray-900">@yield('page_title', 'Dashboard')</h1>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="{{ route('home') }}" target="_blank" class="text-sm text-saffron-700 hover:text-saffron-900">View site →</a>
+                    <a href="{{ route('home') }}" target="_blank" class="hidden sm:inline-flex text-sm text-saffron-700 hover:text-saffron-900">View site →</a>
                     <div class="hidden sm:block text-right">
                         <div class="text-sm font-medium text-gray-900">{{ auth()->user()?->name }}</div>
                         <div class="text-xs text-gray-500">{{ \Illuminate\Support\Str::title(str_replace('_', ' ', auth()->user()?->role ?? '')) }}</div>

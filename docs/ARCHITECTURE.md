@@ -39,7 +39,7 @@ GSSTG is a Laravel 12 web platform for a goshala (cow-rescue NGO). It serves a p
                            │
                            ▼
               Blade views (resources/views)  ─►  HTML response
-              (Tailwind v4 build via Vite; Alpine 3 via CDN)
+              (Tailwind v4 + Alpine 3/collapse bundled via Vite)
 
   Storage: MySQL (prod) / SQLite (dev) · Sessions/Cache/Queue → database driver
 ```
@@ -149,7 +149,7 @@ Declared but unused: Postmark, Resend, AWS SES, Slack (scaffold stanzas).
 
 ## 11. Real-Time / Event Flows
 
-None. `BROADCAST_CONNECTION` is at its scaffold default; there are **no WebSockets, SSE, broadcasting, pub/sub, or event listeners** wired up. The only "event-like" hook is the `Donation` model's `booted()` callback that generates `reference_no` on create. All interactivity is client-side Alpine (CDN) + a sliver of bundled JS for the UPI QR.
+None. `BROADCAST_CONNECTION` is at its scaffold default; there are **no WebSockets, SSE, broadcasting, pub/sub, or event listeners** wired up. The only "event-like" hook is the `Donation` model's `booted()` callback that generates `reference_no` on create. Client interactivity is bundled Alpine + collapse and UPI QR rendering.
 
 ## 12. Server Access
 

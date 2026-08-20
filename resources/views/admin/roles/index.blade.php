@@ -7,6 +7,7 @@
 </x-admin.page-header>
 
 <div class="admin-card overflow-hidden">
+    <div class="overflow-x-auto">
     <table class="w-full admin-table">
         <thead class="bg-gray-50">
             <tr>
@@ -40,5 +41,6 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>
 @endsection

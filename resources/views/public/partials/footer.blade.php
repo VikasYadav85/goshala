@@ -1,19 +1,20 @@
 <footer class="bg-saffron-900 text-saffron-50 mt-20">
     <div class="container mx-auto px-4 py-14 grid md:grid-cols-4 gap-10">
-        <div class="md:col-span-2">
+        <div class="md:col-span-2 min-w-0">
             <div class="bg-white/10 inline-block rounded-2xl p-3 mb-4">
-                <img src="{{ asset('img/logo.png') }}" alt="Gopal Seva Samarpan Trust" class="h-20 w-auto">
+                <img src="{{ asset('img/logo.png') }}" alt="Gopal Samarpan Sewa Charitable Trust" class="h-20 w-auto">
             </div>
             <div class="text-xs uppercase tracking-widest text-saffron-300 mb-3">Goshala &amp; Cow Rescue</div>
             <p class="text-saffron-100/90 leading-relaxed mb-4 max-w-md">
                 {{ $publicSettings['footer_about'] }}
             </p>
 
-            <form method="POST" action="{{ route('subscribe') }}" class="flex max-w-md gap-2">
+            <form method="POST" action="{{ route('subscribe') }}" class="flex flex-col sm:flex-row max-w-md gap-2 min-w-0">
                 @csrf
-                <input type="email" name="email" required placeholder="Subscribe to seva updates"
-                       class="flex-1 px-4 py-2 rounded-full bg-saffron-800 border border-saffron-700 text-saffron-50 placeholder-saffron-300 focus:outline-none focus:ring-2 focus:ring-saffron-400">
-                <button class="btn btn-primary !bg-saffron-500 hover:!bg-saffron-400">Subscribe</button>
+                <label for="footer_subscriber_email" class="sr-only">Email for seva updates</label>
+                <input id="footer_subscriber_email" type="email" name="email" required placeholder="Subscribe to seva updates"
+                       class="w-full min-w-0 sm:flex-1 px-4 py-2 rounded-full bg-saffron-800 border border-saffron-700 text-saffron-50 placeholder-saffron-300 focus:outline-none focus:ring-2 focus:ring-saffron-400">
+                <button class="btn btn-primary w-full sm:w-auto !bg-saffron-500 hover:!bg-saffron-400">Subscribe</button>
             </form>
 
             <div class="mt-6 flex items-center gap-3">
@@ -50,9 +51,17 @@
         <div>
             <h3 class="font-display text-lg font-semibold mb-4">Reach Us</h3>
             <address class="not-italic text-saffron-100/90 leading-relaxed">
-                {{ $publicSettings['address'] }}<br>
+                @if (!empty($publicSettings['address']))
+                    <span class="block text-saffron-300 text-xs uppercase tracking-widest">Goshala</span>
+                    {{ $publicSettings['address'] }}<br>
+                @endif
+                @if (!empty($publicSettings['registered_office']))
+                    <span class="block mt-2 text-saffron-300 text-xs uppercase tracking-widest">Registered Office</span>
+                    {{ $publicSettings['registered_office'] }}<br>
+                @endif
+                <span class="block mt-2"></span>
                 <a href="tel:{{ $publicSettings['phone'] }}" class="hover:text-white">{{ $publicSettings['phone'] }}</a><br>
-                <a href="mailto:{{ $publicSettings['email'] }}" class="hover:text-white">{{ $publicSettings['email'] }}</a>
+                <a href="mailto:{{ $publicSettings['email'] }}" class="hover:text-white break-all">{{ $publicSettings['email'] }}</a>
             </address>
 
             <div class="mt-6 grid grid-cols-3 gap-2 text-center text-xs">
@@ -65,7 +74,7 @@
 
     <div class="border-t border-saffron-800">
         <div class="container mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-saffron-200">
-            <div>© {{ date('Y') }} Gopal Seva Samarpan Trust. All rights reserved.</div>
+            <div>© {{ date('Y') }} Gopal Samarpan Sewa Charitable Trust. All rights reserved.</div>
             <div class="flex items-center gap-4">
                 <a href="{{ route('faqs') }}" class="hover:text-white">FAQs</a>
                 <a href="{{ route('contact.index') }}" class="hover:text-white">Contact</a>

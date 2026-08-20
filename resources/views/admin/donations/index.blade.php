@@ -4,15 +4,17 @@
 
 @section('content')
 
-<form method="GET" class="admin-card p-4 mb-5 flex flex-wrap gap-3">
-    <input name="search" value="{{ request('search') }}" placeholder="Search by donor name, email, reference…" class="form-input flex-1 min-w-[200px]">
-    <select name="status" class="form-select max-w-[180px]">
+<form method="GET" class="admin-card p-4 mb-5 flex flex-col sm:flex-row gap-3">
+    <label for="donation_search" class="sr-only">Search donations</label>
+    <input id="donation_search" name="search" value="{{ request('search') }}" placeholder="Search by donor name, email, reference…" class="form-input flex-1 min-w-0">
+    <label for="donation_status_filter" class="sr-only">Filter by payment status</label>
+    <select id="donation_status_filter" name="status" class="form-select w-full sm:max-w-[180px]">
         <option value="">All statuses</option>
         @foreach (['pending','processing','success','failed','refunded'] as $s)
             <option value="{{ $s }}" @selected(request('status') === $s)>{{ ucfirst($s) }}</option>
         @endforeach
     </select>
-    <button class="btn btn-primary text-sm">Filter</button>
+    <button class="btn btn-primary text-sm w-full sm:w-auto">Filter</button>
 </form>
 
 <div class="admin-card overflow-hidden">

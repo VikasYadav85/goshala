@@ -10,7 +10,7 @@
 
 <section class="py-16">
     <div class="container mx-auto px-4 grid lg:grid-cols-3 gap-8">
-        <form action="{{ route('donations.store') }}" method="POST" class="lg:col-span-2 card-soft p-8">
+        <form action="{{ route('donations.store') }}" method="POST" class="lg:col-span-2 card-soft p-5 sm:p-8 min-w-0">
             @csrf
 
             @if ($category)<input type="hidden" name="donation_category_id" value="{{ $category->id }}">@endif
@@ -21,57 +21,57 @@
 
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label class="form-label">Full name *</label>
-                    <input name="donor_name" required maxlength="120" value="{{ old('donor_name') }}" class="form-input">
+                    <label for="donor_name" class="form-label">Full name *</label>
+                    <input id="donor_name" name="donor_name" required maxlength="120" value="{{ old('donor_name') }}" class="form-input">
                     @error('donor_name')<div class="form-error">{{ $message }}</div>@enderror
                 </div>
                 <div>
-                    <label class="form-label">Email *</label>
-                    <input type="email" name="donor_email" required value="{{ old('donor_email') }}" class="form-input">
+                    <label for="donor_email" class="form-label">Email *</label>
+                    <input id="donor_email" type="email" name="donor_email" required value="{{ old('donor_email') }}" class="form-input">
                     @error('donor_email')<div class="form-error">{{ $message }}</div>@enderror
                 </div>
                 <div>
-                    <label class="form-label">Phone *</label>
-                    <input name="donor_phone" required value="{{ old('donor_phone') }}" class="form-input">
+                    <label for="donor_phone" class="form-label">Phone *</label>
+                    <input id="donor_phone" name="donor_phone" required value="{{ old('donor_phone') }}" class="form-input">
                     @error('donor_phone')<div class="form-error">{{ $message }}</div>@enderror
                 </div>
                 <div>
-                    <label class="form-label">PAN (for 80G receipt)</label>
-                    <input name="donor_pan" maxlength="20" value="{{ old('donor_pan') }}" class="form-input" placeholder="ABCDE1234F">
+                    <label for="donor_pan" class="form-label">PAN (for 80G receipt)</label>
+                    <input id="donor_pan" name="donor_pan" maxlength="20" value="{{ old('donor_pan') }}" class="form-input" placeholder="ABCDE1234F">
                 </div>
                 <div class="sm:col-span-2">
-                    <label class="form-label">Address</label>
-                    <input name="donor_address" value="{{ old('donor_address') }}" class="form-input">
+                    <label for="donor_address" class="form-label">Address</label>
+                    <input id="donor_address" name="donor_address" value="{{ old('donor_address') }}" class="form-input">
                 </div>
-                <div><label class="form-label">City</label><input name="donor_city" value="{{ old('donor_city') }}" class="form-input"></div>
-                <div><label class="form-label">State</label><input name="donor_state" value="{{ old('donor_state') }}" class="form-input"></div>
-                <div><label class="form-label">Pincode</label><input name="donor_pincode" value="{{ old('donor_pincode') }}" class="form-input"></div>
-                <div><label class="form-label">Country</label><input name="donor_country" value="{{ old('donor_country', 'India') }}" class="form-input"></div>
+                <div><label for="donor_city" class="form-label">City</label><input id="donor_city" name="donor_city" value="{{ old('donor_city') }}" class="form-input"></div>
+                <div><label for="donor_state" class="form-label">State</label><input id="donor_state" name="donor_state" value="{{ old('donor_state') }}" class="form-input"></div>
+                <div><label for="donor_pincode" class="form-label">Pincode</label><input id="donor_pincode" name="donor_pincode" value="{{ old('donor_pincode') }}" class="form-input"></div>
+                <div><label for="donor_country" class="form-label">Country</label><input id="donor_country" name="donor_country" value="{{ old('donor_country', 'India') }}" class="form-input"></div>
             </div>
 
             <h2 class="font-display text-2xl font-bold text-saffron-900 mt-8 mb-6 heading-underline">Your contribution</h2>
 
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label class="form-label">Amount (₹) *</label>
-                    <input type="number" name="amount" required min="10" value="{{ old('amount', $amount) }}" class="form-input">
+                    <label for="donation_amount" class="form-label">Amount (₹) *</label>
+                    <input id="donation_amount" type="number" name="amount" required min="10" value="{{ old('amount', $amount) }}" class="form-input">
                     @error('amount')<div class="form-error">{{ $message }}</div>@enderror
                 </div>
                 <div>
-                    <label class="form-label">Frequency *</label>
-                    <select name="frequency" class="form-select">
+                    <label for="donation_frequency" class="form-label">Frequency *</label>
+                    <select id="donation_frequency" name="frequency" class="form-select">
                         <option value="one_time" {{ old('frequency') === 'one_time' ? 'selected' : '' }}>One-time donation</option>
                         <option value="monthly" {{ old('frequency') === 'monthly' ? 'selected' : '' }}>Monthly</option>
                         <option value="yearly" {{ old('frequency') === 'yearly' ? 'selected' : '' }}>Yearly</option>
                     </select>
                 </div>
                 <div class="sm:col-span-2">
-                    <label class="form-label">Dedication (optional)</label>
-                    <input name="dedication" maxlength="255" value="{{ old('dedication') }}" class="form-input" placeholder="In memory of, in honour of, on the occasion of...">
+                    <label for="donation_dedication" class="form-label">Dedication (optional)</label>
+                    <input id="donation_dedication" name="dedication" maxlength="255" value="{{ old('dedication') }}" class="form-input" placeholder="In memory of, in honour of, on the occasion of...">
                 </div>
                 <div class="sm:col-span-2">
-                    <label class="form-label">Message (optional)</label>
-                    <textarea name="message" rows="3" class="form-textarea" placeholder="Any prayer or message you'd like to share with the Goshala team">{{ old('message') }}</textarea>
+                    <label for="donation_message" class="form-label">Message (optional)</label>
+                    <textarea id="donation_message" name="message" rows="3" class="form-textarea" placeholder="Any prayer or message you'd like to share with the Goshala team">{{ old('message') }}</textarea>
                 </div>
             </div>
 

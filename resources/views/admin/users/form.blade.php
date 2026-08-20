@@ -7,33 +7,33 @@
     @if ($user->exists) @method('PUT') @endif
     <div class="grid sm:grid-cols-2 gap-4">
         <div>
-            <label class="form-label">Name *</label>
-            <input name="name" required value="{{ old('name', $user->name) }}" class="form-input">
+            <label for="user_name" class="form-label">Name *</label>
+            <input id="user_name" name="name" required value="{{ old('name', $user->name) }}" class="form-input">
         </div>
         <div>
-            <label class="form-label">Email *</label>
-            <input type="email" name="email" required value="{{ old('email', $user->email) }}" class="form-input">
+            <label for="user_email" class="form-label">Email *</label>
+            <input id="user_email" type="email" name="email" required value="{{ old('email', $user->email) }}" class="form-input">
         </div>
         <div>
-            <label class="form-label">Phone</label>
-            <input name="phone" value="{{ old('phone', $user->phone) }}" class="form-input">
+            <label for="user_phone" class="form-label">Phone</label>
+            <input id="user_phone" name="phone" value="{{ old('phone', $user->phone) }}" class="form-input">
         </div>
         <div>
-            <label class="form-label">Role *</label>
-            <select name="role" class="form-select">
+            <label for="user_role" class="form-label">Role *</label>
+            <select id="user_role" name="role" class="form-select">
                 @foreach ($roles as $role)
                     <option value="{{ $role }}" @selected(old('role', $user->role) === $role)>{{ \Illuminate\Support\Str::title(str_replace('_', ' ', $role)) }}</option>
                 @endforeach
             </select>
         </div>
         <div>
-            <label class="form-label">{{ $user->exists ? 'New password' : 'Password *' }}</label>
-            <input type="password" name="password" @required(! $user->exists) class="form-input" autocomplete="new-password">
+            <label for="user_password" class="form-label">{{ $user->exists ? 'New password' : 'Password *' }}</label>
+            <input id="user_password" type="password" name="password" @required(! $user->exists) class="form-input" autocomplete="new-password">
             @if ($user->exists)<p class="text-xs text-gray-500 mt-1">Leave blank to keep the current password.</p>@endif
         </div>
         <div>
-            <label class="form-label">Confirm password</label>
-            <input type="password" name="password_confirmation" @required(! $user->exists) class="form-input" autocomplete="new-password">
+            <label for="user_password_confirmation" class="form-label">Confirm password</label>
+            <input id="user_password_confirmation" type="password" name="password_confirmation" @required(! $user->exists) class="form-input" autocomplete="new-password">
         </div>
         <label class="flex items-center gap-2 text-sm sm:col-span-2">
             <input type="checkbox" name="is_active" value="1" @checked(old('is_active', $user->is_active ?? true)) class="rounded"> Active (can sign in)

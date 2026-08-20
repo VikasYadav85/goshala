@@ -10,7 +10,7 @@ class FaqSeeder extends Seeder
     public function run(): void
     {
         $faqs = [
-            ['donation', 'Are donations to Gopal Seva Samarpan Trust tax exempt?', 'Yes. We are registered under Section 80G of the Income Tax Act. You will receive an 80G receipt by email after every successful donation. PAN is required for receipts above ₹2,000.'],
+            ['donation', 'Are donations to Gopal Samarpan Sewa Charitable Trust tax exempt?', 'Yes. We are registered under Section 80G of the Income Tax Act. You will receive an 80G receipt by email after every successful donation. PAN is required for receipts above ₹2,000.'],
             ['donation', 'What payment methods do you accept?', 'We accept all major payment methods through Razorpay — credit/debit cards, UPI, net banking, and wallets. You can also donate via direct bank transfer or UPI ID. Bank details are listed on our donation page.'],
             ['donation', 'Can I donate in someone\'s memory or as a gift?', 'Absolutely. On the checkout page, you\'ll find a "Dedication" field where you can mention "in memory of", "in honour of", or any custom message. We can issue a printed acknowledgement for the recipient on request.'],
             ['donation', 'What happens to my money?', 'Every rupee is utilised toward Gau Seva — fodder, medicine, shelter, rescue, and Goshala operations. Less than 3% goes to administration. Annual audited reports are public.'],

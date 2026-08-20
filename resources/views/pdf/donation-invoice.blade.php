@@ -50,8 +50,9 @@
                     <img src="{{ $logo }}" alt="logo" style="height:46px;">
                 @endif
                 <div class="brand">{{ $trust['name'] }}</div>
+                @php $trustAddress = ($trust['registered_office'] ?? null) ?: ($trust['address'] ?? null); @endphp
                 <div class="sub">
-                    @if($trust['address']){{ $trust['address'] }}<br>@endif
+                    @if($trustAddress){{ $trustAddress }}<br>@endif
                     @if($trust['email']){{ $trust['email'] }}@endif @if($trust['phone']) • {{ $trust['phone'] }}@endif
                 </div>
             </td>

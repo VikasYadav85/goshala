@@ -27,31 +27,31 @@
         @endforeach
     </div>
 
-    <div class="container mx-auto px-4 max-w-3xl card-soft p-8">
+    <div class="container mx-auto px-4 max-w-3xl card-soft p-5 sm:p-8">
         <h2 class="font-display text-2xl font-bold text-saffron-900 mb-6 heading-underline">Volunteer registration</h2>
         <form action="{{ route('volunteer.store') }}" method="POST">
             @csrf
             <div class="grid sm:grid-cols-2 gap-4">
-                <div><label class="form-label">Full name *</label><input name="full_name" required value="{{ old('full_name') }}" class="form-input">@error('full_name')<div class="form-error">{{ $message }}</div>@enderror</div>
-                <div><label class="form-label">Email *</label><input type="email" name="email" required value="{{ old('email') }}" class="form-input">@error('email')<div class="form-error">{{ $message }}</div>@enderror</div>
-                <div><label class="form-label">Phone *</label><input name="phone" required value="{{ old('phone') }}" class="form-input">@error('phone')<div class="form-error">{{ $message }}</div>@enderror</div>
-                <div><label class="form-label">Date of birth</label><input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" class="form-input"></div>
+                <div><label for="volunteer_full_name" class="form-label">Full name *</label><input id="volunteer_full_name" name="full_name" required value="{{ old('full_name') }}" class="form-input">@error('full_name')<div class="form-error">{{ $message }}</div>@enderror</div>
+                <div><label for="volunteer_email" class="form-label">Email *</label><input id="volunteer_email" type="email" name="email" required value="{{ old('email') }}" class="form-input">@error('email')<div class="form-error">{{ $message }}</div>@enderror</div>
+                <div><label for="volunteer_phone" class="form-label">Phone *</label><input id="volunteer_phone" name="phone" required value="{{ old('phone') }}" class="form-input">@error('phone')<div class="form-error">{{ $message }}</div>@enderror</div>
+                <div><label for="volunteer_date_of_birth" class="form-label">Date of birth</label><input id="volunteer_date_of_birth" type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" class="form-input"></div>
                 <div>
-                    <label class="form-label">Gender</label>
-                    <select name="gender" class="form-select">
+                    <label for="volunteer_gender" class="form-label">Gender</label>
+                    <select id="volunteer_gender" name="gender" class="form-select">
                         <option value="">Select</option>
                         <option value="female">Female</option>
                         <option value="male">Male</option>
                         <option value="other">Other</option>
                     </select>
                 </div>
-                <div><label class="form-label">Occupation</label><input name="occupation" value="{{ old('occupation') }}" class="form-input"></div>
-                <div><label class="form-label">City</label><input name="city" value="{{ old('city') }}" class="form-input"></div>
-                <div><label class="form-label">State</label><input name="state" value="{{ old('state') }}" class="form-input"></div>
+                <div><label for="volunteer_occupation" class="form-label">Occupation</label><input id="volunteer_occupation" name="occupation" value="{{ old('occupation') }}" class="form-input"></div>
+                <div><label for="volunteer_city" class="form-label">City</label><input id="volunteer_city" name="city" value="{{ old('city') }}" class="form-input"></div>
+                <div><label for="volunteer_state" class="form-label">State</label><input id="volunteer_state" name="state" value="{{ old('state') }}" class="form-input"></div>
             </div>
 
-            <div class="mt-5">
-                <label class="form-label">Areas of interest (pick any)</label>
+            <fieldset class="mt-5">
+                <legend class="form-label">Areas of interest (pick any)</legend>
                 <div class="grid sm:grid-cols-3 gap-2 text-sm">
                     @foreach (['feeding','events','rescue','social_media','fundraising','medical','construction','festivals'] as $area)
                         <label class="flex items-center gap-2 px-3 py-2 rounded-xl border border-saffron-200 cursor-pointer hover:bg-saffron-50">
@@ -60,10 +60,10 @@
                         </label>
                     @endforeach
                 </div>
-            </div>
+            </fieldset>
 
-            <div class="mt-5">
-                <label class="form-label">Availability</label>
+            <fieldset class="mt-5">
+                <legend class="form-label">Availability</legend>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
                     @foreach (['weekdays','weekends','evenings','full_time'] as $av)
                         <label class="flex items-center gap-2 px-3 py-2 rounded-xl border border-saffron-200 cursor-pointer hover:bg-saffron-50">
@@ -72,12 +72,12 @@
                         </label>
                     @endforeach
                 </div>
-            </div>
+            </fieldset>
 
             <div class="grid sm:grid-cols-2 gap-4 mt-5">
-                <div class="sm:col-span-2"><label class="form-label">Previous experience (optional)</label><textarea name="previous_experience" rows="3" class="form-textarea">{{ old('previous_experience') }}</textarea></div>
-                <div class="sm:col-span-2"><label class="form-label">What inspires you to serve? (optional)</label><textarea name="motivation" rows="3" class="form-textarea">{{ old('motivation') }}</textarea></div>
-                <div><label class="form-label">How did you hear about us?</label><input name="referral_source" class="form-input" value="{{ old('referral_source') }}"></div>
+                <div class="sm:col-span-2"><label for="volunteer_previous_experience" class="form-label">Previous experience (optional)</label><textarea id="volunteer_previous_experience" name="previous_experience" rows="3" class="form-textarea">{{ old('previous_experience') }}</textarea></div>
+                <div class="sm:col-span-2"><label for="volunteer_motivation" class="form-label">What inspires you to serve? (optional)</label><textarea id="volunteer_motivation" name="motivation" rows="3" class="form-textarea">{{ old('motivation') }}</textarea></div>
+                <div><label for="volunteer_referral_source" class="form-label">How did you hear about us?</label><input id="volunteer_referral_source" name="referral_source" class="form-input" value="{{ old('referral_source') }}"></div>
             </div>
 
             <div class="mt-8 flex justify-end">

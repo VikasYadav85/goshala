@@ -6,7 +6,7 @@
 @include('public.partials.page-hero', [
     'eyebrow' => 'Voices of bhakti',
     'title' => 'Words from Donors, Devotees &amp; Volunteers.',
-    'subtitle' => 'Hear what our community shares about their experience with Gopal Seva Samarpan Trust.',
+    'subtitle' => 'Hear what our community shares about their experience with Gopal Samarpan Sewa Charitable Trust.',
 ])
 
 <section class="py-12">

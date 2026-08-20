@@ -6,12 +6,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', config('app.name')) — {{ config('app.name') }}</title>
-    <meta name="description" content="@yield('meta_description', 'Gopal Seva Samarpan Trust — a sanctuary for rescued cows in Bharat. Donate, sponsor a cow, volunteer, and join our spiritual seva.')">
+    <meta name="description" content="@yield('meta_description', 'Gopal Samarpan Sewa Charitable Trust — a sanctuary for rescued cows in Bharat. Donate, sponsor a cow, volunteer, and join our spiritual seva.')">
 
     <link rel="canonical" href="{{ url()->current() }}">
 
     <meta property="og:title" content="@yield('title', config('app.name'))">
-    <meta property="og:description" content="@yield('meta_description', 'Gopal Seva Samarpan Trust — Goshala for rescued cows.')">
+    <meta property="og:description" content="@yield('meta_description', 'Gopal Samarpan Sewa Charitable Trust — Goshala for rescued cows.')">
     <meta property="og:image" content="@yield('og_image', asset('img/og-default.jpg'))">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">
@@ -46,7 +46,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @stack('head')
 </head>
 <body class="bg-cream text-saffron-900/90 antialiased font-sans">

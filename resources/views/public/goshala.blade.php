@@ -1,6 +1,6 @@
 @extends('public.layout')
 @section('title', 'Our Goshala — The Sanctuary')
-@section('meta_description', 'Meet our rescued cows, learn about daily care routines, sustainability practices and sponsor a Gau Mata at the Gopal Seva Samarpan Trust Goshala.')
+@section('meta_description', 'Meet our rescued cows, learn about daily care routines, sustainability practices and sponsor a Gau Mata at the Gopal Samarpan Sewa Charitable Trust Goshala.')
 
 @section('content')
 

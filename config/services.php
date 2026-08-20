@@ -58,10 +58,12 @@ return [
 
     // Used on donation receipts / 80G tax invoices
     'trust' => [
-        'name' => env('APP_NAME', 'Gopal Seva Samarpan Trust'),
+        'name' => env('APP_NAME', 'Gopal Samarpan Sewa Charitable Trust'),
         'email' => env('TRUST_EMAIL'),
         'phone' => env('TRUST_PHONE'),
         'address' => env('TRUST_ADDRESS'),
+        // Registered office (trust deed) — shown as the official address on 80G receipts.
+        'registered_office' => env('TRUST_REGISTERED_OFFICE'),
         'pan' => env('TRUST_PAN'),
         '80g_number' => env('TRUST_80G_NUMBER'),
         'reg_number' => env('TRUST_REG_NUMBER'),

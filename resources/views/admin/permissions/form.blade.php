@@ -10,18 +10,18 @@
 
     <div class="grid sm:grid-cols-2 gap-4">
         <div class="sm:col-span-2">
-            <label class="form-label">Permission key (slug) *</label>
-            <input name="name" required value="{{ old('name', $permission->name) }}" class="form-input"
+            <label for="permission_name" class="form-label">Permission key (slug) *</label>
+            <input id="permission_name" name="name" required value="{{ old('name', $permission->name) }}" class="form-input"
                    @readonly($isCore) placeholder="e.g. manage-reports">
             <p class="text-xs text-gray-500 mt-1">
                 Lowercase letters, numbers, hyphen/underscore. This is the key checked in code
-                (<code>@can('...')</code> / <code>permission:...</code>).
+                (<code>@@can('...')</code> / <code>permission:...</code>).
                 @if ($isCore)<span class="text-amber-700">Built-in — key is locked, only the group is editable.</span>@endif
             </p>
         </div>
         <div class="sm:col-span-2">
-            <label class="form-label">Group</label>
-            <input name="group" value="{{ old('group', $permission->group) }}" class="form-input" placeholder="e.g. Content">
+            <label for="permission_group" class="form-label">Group</label>
+            <input id="permission_group" name="group" value="{{ old('group', $permission->group) }}" class="form-input" placeholder="e.g. Content">
             <p class="text-xs text-gray-500 mt-1">Display grouping in the role permission matrix.</p>
         </div>
     </div>

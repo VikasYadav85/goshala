@@ -26,8 +26,8 @@
 
     {{-- Main nav --}}
     <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
-        <a href="{{ route('home') }}" class="flex items-center" aria-label="Gopal Seva Samarpan Trust — Home">
-            <img src="{{ asset('img/logo.png') }}" alt="Gopal Seva Samarpan Trust" class="h-14 md:h-16 w-auto">
+        <a href="{{ route('home') }}" class="flex items-center" aria-label="Gopal Samarpan Sewa Charitable Trust — Home">
+            <img src="{{ asset('img/logo.png') }}" alt="Gopal Samarpan Sewa Charitable Trust" class="h-14 md:h-16 w-auto">
         </a>
 
         <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-saffron-900">

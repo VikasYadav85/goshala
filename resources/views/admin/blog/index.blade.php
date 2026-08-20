@@ -9,6 +9,7 @@
 </x-admin.page-header>
 
 <div class="admin-card overflow-hidden">
+    <div class="overflow-x-auto">
     <table class="w-full admin-table">
         <thead class="bg-gray-50">
             <tr>
@@ -47,6 +48,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     <div class="px-5 py-3 border-t border-gray-100">{{ $posts->links() }}</div>
 </div>
 
