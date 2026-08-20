@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" href="{{ asset('favicon.ico') }}?v={{ @filemtime(public_path('favicon.ico')) }}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{ asset('img/logo-mark.png') }}?v={{ @filemtime(public_path('img/logo-mark.png')) }}">
+
     <title>@yield('title', config('app.name')) — {{ config('app.name') }}</title>
     <meta name="description" content="@yield('meta_description', 'Gopal Samarpan Sewa Charitable Trust — a sanctuary for rescued cows in Bharat. Donate, sponsor a cow, volunteer, and join our spiritual seva.')">
 
