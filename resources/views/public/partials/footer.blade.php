@@ -64,9 +64,15 @@
                 @if (!empty($publicSettings['phone2']))
                     <a href="tel:{{ $publicSettings['phone2'] }}" class="hover:text-white">{{ $publicSettings['phone2'] }}</a><br>
                 @endif
+                @if (!empty($publicSettings['phone3']))
+                    <a href="tel:{{ $publicSettings['phone3'] }}" class="hover:text-white">{{ $publicSettings['phone3'] }}</a><br>
+                @endif
                 <a href="mailto:{{ $publicSettings['email'] }}" class="hover:text-white break-all">{{ $publicSettings['email'] }}</a>
                 @if (!empty($publicSettings['email2']))
                     <br><a href="mailto:{{ $publicSettings['email2'] }}" class="hover:text-white break-all">{{ $publicSettings['email2'] }}</a>
+                @endif
+                @if (!empty($publicSettings['email3']))
+                    <br><a href="mailto:{{ $publicSettings['email3'] }}" class="hover:text-white break-all">{{ $publicSettings['email3'] }}</a>
                 @endif
             </address>
 

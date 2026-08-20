@@ -26,11 +26,19 @@
                 @if (!empty($publicSettings['phone2']))
                     <p class="text-sm"><a href="tel:{{ $publicSettings['phone2'] }}" class="text-saffron-700 hover:text-saffron-900">📞 {{ $publicSettings['phone2'] }}</a></p>
                 @endif
+                @if (!empty($publicSettings['phone3']))
+                    <p class="text-sm"><a href="tel:{{ $publicSettings['phone3'] }}" class="text-saffron-700 hover:text-saffron-900">📞 {{ $publicSettings['phone3'] }}</a></p>
+                @endif
                 <p class="text-sm"><a href="mailto:{{ $publicSettings['email'] }}" class="text-saffron-700 hover:text-saffron-900">✉️ {{ $publicSettings['email'] }}</a></p>
                 @if (!empty($publicSettings['email2']))
                     <p class="text-sm"><a href="mailto:{{ $publicSettings['email2'] }}" class="text-saffron-700 hover:text-saffron-900">✉️ {{ $publicSettings['email2'] }}</a></p>
                 @endif
-                <p class="text-sm"><a href="https://wa.me/{{ ltrim($publicSettings['whatsapp'] ?? '', '+') }}" class="text-saffron-700 hover:text-saffron-900">💬 WhatsApp: {{ $publicSettings['whatsapp'] }}</a></p>
+                @if (!empty($publicSettings['email3']))
+                    <p class="text-sm"><a href="mailto:{{ $publicSettings['email3'] }}" class="text-saffron-700 hover:text-saffron-900">✉️ {{ $publicSettings['email3'] }}</a></p>
+                @endif
+                @foreach (array_filter([$publicSettings['whatsapp'] ?? null, $publicSettings['whatsapp2'] ?? null, $publicSettings['whatsapp3'] ?? null]) as $wa)
+                    <p class="text-sm"><a href="https://wa.me/{{ preg_replace('/\D/', '', $wa) }}" class="text-saffron-700 hover:text-saffron-900">💬 WhatsApp: {{ $wa }}</a></p>
+                @endforeach
             </div>
 
             <div class="card-soft p-6 bg-saffron-50">

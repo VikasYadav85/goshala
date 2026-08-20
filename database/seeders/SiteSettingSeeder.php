@@ -13,9 +13,13 @@ class SiteSettingSeeder extends Seeder
             // contact group
             ['contact', 'contact_phone',    '+91 75068 62607', 'string',  'Phone',    'Primary phone shown across the site.'],
             ['contact', 'contact_phone_2', '+91 7266945885', 'string',  'Phone (secondary)', 'Second phone shown near the address.'],
+            ['contact', 'contact_phone_3', '+918591300362', 'string',  'Phone (third)', 'Third phone shown near the address.'],
             ['contact', 'contact_email',    'indiabooks@gmail.com', 'string', 'Email',    'Primary email shown across the site.'],
             ['contact', 'contact_email_2', 'vy32353@gmail.com', 'string', 'Email (secondary)', 'Second email shown near the address.'],
-            ['contact', 'contact_whatsapp', '+917266945885', 'string',  'WhatsApp', 'WhatsApp number — used for the floating chat link.'],
+            ['contact', 'contact_email_3', 'vivek66hk@gmail.com', 'string', 'Email (third)', 'Third email shown near the address.'],
+            ['contact', 'contact_whatsapp', '+917266945885', 'string',  'WhatsApp', 'Primary WhatsApp — used for the floating chat link.'],
+            ['contact', 'contact_whatsapp_2', '+91 75068 62607', 'string',  'WhatsApp 2', 'Second WhatsApp number shown on the contact page.'],
+            ['contact', 'contact_whatsapp_3', '+918591300362', 'string',  'WhatsApp 3', 'Third WhatsApp number shown on the contact page.'],
             ['contact', 'contact_address',  'Gram Kukudipur, Post Saidpur Gadaur, Tehsil Sadar, Jaunpur, Uttar Pradesh - 222001', 'text', 'Goshala address', 'Goshala / visiting address shown on the contact page and footer.'],
             ['contact', 'registered_office', 'A-002, Somnath Apartment, S.V. Cross Road, Chandresh Agency, Asha Nagar, Bhayandar East, Thane, Maharashtra - 401105', 'text', 'Registered office', 'Registered office address (from the trust deed) — shown on the contact page, footer, and 80G receipt.'],
 
