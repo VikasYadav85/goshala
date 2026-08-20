@@ -61,7 +61,13 @@
                 @endif
                 <span class="block mt-2"></span>
                 <a href="tel:{{ $publicSettings['phone'] }}" class="hover:text-white">{{ $publicSettings['phone'] }}</a><br>
+                @if (!empty($publicSettings['phone2']))
+                    <a href="tel:{{ $publicSettings['phone2'] }}" class="hover:text-white">{{ $publicSettings['phone2'] }}</a><br>
+                @endif
                 <a href="mailto:{{ $publicSettings['email'] }}" class="hover:text-white break-all">{{ $publicSettings['email'] }}</a>
+                @if (!empty($publicSettings['email2']))
+                    <br><a href="mailto:{{ $publicSettings['email2'] }}" class="hover:text-white break-all">{{ $publicSettings['email2'] }}</a>
+                @endif
             </address>
 
             <div class="mt-6 grid grid-cols-3 gap-2 text-center text-xs">

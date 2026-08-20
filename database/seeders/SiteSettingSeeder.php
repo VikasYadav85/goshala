@@ -12,7 +12,9 @@ class SiteSettingSeeder extends Seeder
         $rows = [
             // contact group
             ['contact', 'contact_phone',    '+91-98765-43210', 'string',  'Phone',    'Primary phone shown across the site.'],
+            ['contact', 'contact_phone_2', '+91 75068 62607', 'string',  'Phone (secondary)', 'Second phone shown near the address.'],
             ['contact', 'contact_email',    'seva@gopalsevatrust.org', 'string', 'Email',    'Primary email shown across the site.'],
+            ['contact', 'contact_email_2', 'indiabooks@gmail.com', 'string', 'Email (secondary)', 'Second email shown near the address.'],
             ['contact', 'contact_whatsapp', '+91-98765-43210', 'string',  'WhatsApp', 'WhatsApp number — used for the floating chat link.'],
             ['contact', 'contact_address',  'Gram Kukudipur, Post Saidpur Gadaur, Tehsil Sadar, Jaunpur, Uttar Pradesh - 222001', 'text', 'Goshala address', 'Goshala / visiting address shown on the contact page and footer.'],
             ['contact', 'registered_office', 'A-002, Somnath Apartment, S.V. Cross Road, Chandresh Agency, Asha Nagar, Bhayandar East, Thane, Maharashtra - 401105', 'text', 'Registered office', 'Registered office address (from the trust deed) — shown on the contact page, footer, and 80G receipt.'],

@@ -48,7 +48,9 @@ class AppServiceProvider extends ServiceProvider
         try {
             return [
                 'phone' => SiteSetting::get('contact_phone', env('TRUST_PHONE')),
+                'phone2' => SiteSetting::get('contact_phone_2', env('TRUST_PHONE_2')),
                 'email' => SiteSetting::get('contact_email', env('TRUST_EMAIL')),
+                'email2' => SiteSetting::get('contact_email_2', env('TRUST_EMAIL_2')),
                 'whatsapp' => SiteSetting::get('contact_whatsapp', env('TRUST_WHATSAPP')),
                 'address' => SiteSetting::get('contact_address', env('TRUST_ADDRESS')),
                 'registered_office' => SiteSetting::get('registered_office', env('TRUST_REGISTERED_OFFICE')),
@@ -64,7 +66,9 @@ class AppServiceProvider extends ServiceProvider
         } catch (\Throwable $e) {
             return [
                 'phone' => env('TRUST_PHONE'),
+                'phone2' => env('TRUST_PHONE_2'),
                 'email' => env('TRUST_EMAIL'),
+                'email2' => env('TRUST_EMAIL_2'),
                 'whatsapp' => env('TRUST_WHATSAPP'),
                 'address' => env('TRUST_ADDRESS'),
                 'registered_office' => env('TRUST_REGISTERED_OFFICE'),

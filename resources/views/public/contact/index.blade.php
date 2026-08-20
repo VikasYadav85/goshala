@@ -23,7 +23,13 @@
                     <p class="text-sm text-saffron-900/80 mb-3">{{ $publicSettings['registered_office'] }}</p>
                 @endif
                 <p class="text-sm"><a href="tel:{{ $publicSettings['phone'] }}" class="text-saffron-700 hover:text-saffron-900">📞 {{ $publicSettings['phone'] }}</a></p>
+                @if (!empty($publicSettings['phone2']))
+                    <p class="text-sm"><a href="tel:{{ $publicSettings['phone2'] }}" class="text-saffron-700 hover:text-saffron-900">📞 {{ $publicSettings['phone2'] }}</a></p>
+                @endif
                 <p class="text-sm"><a href="mailto:{{ $publicSettings['email'] }}" class="text-saffron-700 hover:text-saffron-900">✉️ {{ $publicSettings['email'] }}</a></p>
+                @if (!empty($publicSettings['email2']))
+                    <p class="text-sm"><a href="mailto:{{ $publicSettings['email2'] }}" class="text-saffron-700 hover:text-saffron-900">✉️ {{ $publicSettings['email2'] }}</a></p>
+                @endif
                 <p class="text-sm"><a href="https://wa.me/{{ ltrim($publicSettings['whatsapp'] ?? '', '+') }}" class="text-saffron-700 hover:text-saffron-900">💬 WhatsApp: {{ $publicSettings['whatsapp'] }}</a></p>
             </div>
 
