@@ -1,7 +1,7 @@
 <footer class="bg-saffron-900 text-saffron-50 mt-20">
     <div class="container mx-auto px-4 py-14 grid md:grid-cols-4 gap-10">
         <div class="md:col-span-2 min-w-0">
-            <div class="bg-white/10 inline-block rounded-2xl p-3 mb-4">
+            <div class="bg-white inline-block rounded-2xl p-3 mb-4 shadow-sm">
                 <img src="{{ asset('img/logo.png') }}?v={{ @filemtime(public_path('img/logo.png')) }}" alt="Gopal Samarpan Sewa Charitable Trust" class="h-20 w-auto">
             </div>
             <div class="text-xs uppercase tracking-widest text-saffron-300 mb-3">Goshala &amp; Cow Rescue</div>
