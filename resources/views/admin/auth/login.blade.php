@@ -11,7 +11,7 @@
     <div class="w-full max-w-md">
         <div class="card-soft p-8">
             <div class="text-center mb-6">
-                <img src="{{ asset('img/logo.png') }}" alt="Gopal Samarpan Sewa Charitable Trust" class="h-24 w-auto mx-auto mb-3">
+                <img src="{{ asset('img/logo.png') }}?v={{ @filemtime(public_path('img/logo.png')) }}" alt="Gopal Samarpan Sewa Charitable Trust" class="h-24 w-auto mx-auto mb-3">
                 <h1 class="font-display text-2xl font-bold text-saffron-900">Admin Sign-in</h1>
                 <p class="text-sm text-saffron-700 mt-1">Gopal Samarpan Sewa Charitable Trust</p>
             </div>

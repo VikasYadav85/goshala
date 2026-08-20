@@ -1,7 +1,7 @@
 @php
     $trust = config('services.trust');
     $appName = config('app.name');
-    $logo = asset('img/logo.png');
+    $logo = asset('img/logo.png').'?v='.@filemtime(public_path('img/logo.png'));
 @endphp
 <!DOCTYPE html>
 <html lang="en">

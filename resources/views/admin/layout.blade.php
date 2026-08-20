@@ -17,7 +17,7 @@
         <div class="px-5 py-5 border-b border-saffron-800">
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
                 <div class="bg-white rounded-xl p-1.5 flex items-center justify-center">
-                    <img src="{{ asset('img/logo-mark.png') }}" alt="" class="w-9 h-9 object-contain">
+                    <img src="{{ asset('img/logo-mark.png') }}?v={{ @filemtime(public_path('img/logo-mark.png')) }}" alt="" class="w-9 h-9 object-contain">
                 </div>
                 <div>
                     <div class="font-display font-semibold leading-tight">Gopal Samarpan Sewa Charitable Trust</div>
