@@ -67,6 +67,7 @@
                         'links' => [
                             ['admin.volunteers.index', '🌱 Volunteers', 'manage-volunteers'],
                             ['admin.messages.index', '✉️ Messages', 'manage-messages'],
+                            ['admin.invitations.index', '💌 Invitations', 'manage-invitations'],
                         ],
                     ],
                     [

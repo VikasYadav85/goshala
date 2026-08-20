@@ -37,6 +37,7 @@ return [
 
         'manage-volunteers' => ['group' => 'Engagement', 'label' => 'Manage volunteers'],
         'manage-messages' => ['group' => 'Engagement', 'label' => 'Manage messages'],
+        'manage-invitations' => ['group' => 'Engagement', 'label' => 'Send invitations'],
 
         'manage-settings' => ['group' => 'Settings', 'label' => 'Manage site settings'],
 
@@ -56,7 +57,7 @@ return [
             'manage-donations', 'manage-donation-categories', 'manage-campaigns',
             'manage-cows', 'manage-events', 'manage-gallery',
             'manage-blog', 'manage-testimonials', 'manage-team', 'manage-faqs',
-            'manage-volunteers', 'manage-messages',
+            'manage-volunteers', 'manage-messages', 'manage-invitations',
             'manage-settings',
         ],
         User::ROLE_EDITOR => [

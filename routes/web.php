@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DonationController as AdminDonationController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\InvitationController as AdminInvitationController;
 use App\Http\Controllers\Admin\PermissionController as AdminPermissionController;
 use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\SettingsController as AdminSettingsController;
@@ -141,6 +142,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('messages/{message}', [AdminContactMessageController::class, 'show'])->name('messages.show');
             Route::patch('messages/{message}', [AdminContactMessageController::class, 'update'])->name('messages.update');
             Route::delete('messages/{message}', [AdminContactMessageController::class, 'destroy'])->name('messages.destroy');
+        });
+
+        Route::middleware('permission:manage-invitations')->group(function () {
+            Route::get('invitations', [AdminInvitationController::class, 'index'])->name('invitations.index');
+            Route::get('invitations/create', [AdminInvitationController::class, 'create'])->name('invitations.create');
+            Route::post('invitations', [AdminInvitationController::class, 'store'])->name('invitations.store');
+            Route::post('invitations/{invitation}/resend', [AdminInvitationController::class, 'resend'])->name('invitations.resend');
+            Route::delete('invitations/{invitation}', [AdminInvitationController::class, 'destroy'])->name('invitations.destroy');
         });
 
         Route::resource('testimonials', AdminTestimonialController::class)->except(['show'])->middleware('permission:manage-testimonials');

@@ -16,6 +16,12 @@ Format: [DATE] [AUTHOR] Description
   at boot) so it reflects settings saved during a request. Covered by `TrustIdentityTest`.
 
 ### Added
+- Invitations: admin-only invitation sender (`manage-invitations` permission, Engagement nav).
+  Staff fill invitee + event details (occasion, date, time, venue, message); a branded
+  invitation email (shared email layout + trust details, addresses, all phones/emails,
+  WhatsApp, Get-Directions CTA) is sent to the invitee and every invitation is logged in the
+  new `invitations` table (status pending/sent/failed, resend + delete). `Admin\InvitationController`,
+  `InvitationMail`, `emails/invitation.blade.php`. Covered by `InvitationTest`.
 - Final client-delivery QA: form accessibility/validation and admin-login regression coverage. Full suite now passes 54 tests (176 assertions).
 - Alpine.js and its collapse plugin are bundled locally through Vite so mobile navigation and accordions do not depend on a third-party CDN.
 - Media optimization: every admin image upload now converts JPEG/PNG/WebP to WebP (quality 82), caps the longest edge at 1920px, uses UUID filenames, and removes replaced files safely. Gallery covers are center-cropped to 1280×720. Gallery videos remain external YouTube embeds with strict URL validation. Added 12 focused tests (19 assertions).

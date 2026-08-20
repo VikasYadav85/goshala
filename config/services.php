@@ -61,8 +61,11 @@ return [
         'name' => env('APP_NAME', 'Gopal Samarpan Sewa Charitable Trust'),
         'email' => env('TRUST_EMAIL'),
         'email2' => env('TRUST_EMAIL_2'),
+        'email3' => env('TRUST_EMAIL_3'),
         'phone' => env('TRUST_PHONE'),
         'phone2' => env('TRUST_PHONE_2'),
+        'phone3' => env('TRUST_PHONE_3'),
+        'whatsapp' => env('TRUST_WHATSAPP'),
         'address' => env('TRUST_ADDRESS'),
         // Registered office (trust deed) — shown as the official address on 80G receipts.
         'registered_office' => env('TRUST_REGISTERED_OFFICE'),

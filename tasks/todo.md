@@ -1,6 +1,28 @@
 # Current Tasks
 
 ## In Progress
+### Invitation feature (admin) — AWAITING APPROVAL
+Admin-only invitation sender: staff fills invitee + event details, invitee gets a
+branded invitation email with trust details; every invitation logged in DB.
+
+- DB: `invitations` table + `Invitation` model (invitee_name, invitee_email,
+  invitee_phone?, occasion, event_date?, event_time?, venue?, message?, status,
+  sent_at, created_by). STATUS_PENDING/SENT/FAILED.
+- RBAC: new `manage-invitations` permission in config/rbac.php (Engagement group),
+  granted to admin (super_admin auto). Reseed + assign on live.
+- Controller: `Admin\InvitationController` — index (list), create (form), store
+  (validate → save → send email → set status), destroy, resend.
+- Routes: under `auth`+`admin`, gated `permission:manage-invitations`.
+- Nav: "Invitations" link in admin sidebar (Engagement group), @can-gated.
+- Views: admin/invitations/{index,form}.blade.php (existing admin style).
+- Email: `InvitationMail` mailable + emails/invitation.blade.php using the shared
+  branded emails/layout (logo header/footer). Content: greeting, invitation text,
+  event block (occasion/date/time/venue), personal message, trust details
+  (address x2, phones, emails, whatsapp), CTA (website / directions). Sent via
+  Brevo; failures caught + logged + status=failed.
+- Tests: permission gate (403 without), create+send (Mail::fake asserts InvitationMail
+  to invitee), validation, record persisted.
+- Deploy: migrate + seed permission + assign to admin on live (backup first).
 ### Client delivery QA — 2026-08-14 (awaiting APPROVED)
 - Fix admin login so authenticated/admin logins always land on `/admin`.
 - Fix permission create/edit 500 caused by an unescaped Blade directive example.
