@@ -16,7 +16,7 @@ class TrustIdentityTest extends TestCase
 
     private const NEW_NAME = 'Gopal Samarpan Sewa Charitable Trust';
     private const OLD_NAME = 'Gopal Seva Samarpan Trust';
-    private const GOSHALA = 'Jaunpur, Uttar Pradesh - 222001';
+    private const GOSHALA = 'Gram Kukudipur, Post Saidpur Gadaur, Tehsil Sadar, Jaunpur, Uttar Pradesh - 222001';
     private const REGISTERED = 'Bhayandar East, Thane, Maharashtra - 401105';
 
     protected function setUp(): void
